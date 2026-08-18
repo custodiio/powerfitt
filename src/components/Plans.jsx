@@ -1,85 +1,69 @@
 import React from "react";
-import { Check, Star, ArrowRight, Zap, Gift, ShieldCheck, HeartHandshake } from "lucide-react";
+import { CheckCircle2, Flame, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 import { openWhatsApp } from "../utils/whatsapp";
 
 export default function Plans({ onOpenTrialModal }) {
   const plans = [
     {
       id: "mensal",
-      name: "Plano Mensal",
-      badge: "Mês a Mês",
+      num: "01",
+      name: "PLANO MENSAL",
       slogan: "Liberdade para treinar do seu jeito.",
-      price: "90",
-      cents: ",00",
+      price: "90,00",
       period: "/mês",
-      installment: "Pagamento mensal flexível",
+      installment: null,
       benefits: [
         "Acesso livre à Musculação",
         "Aulas de Dança e Ritmos inclusas",
-        "Acompanhamento de instrutores no salão",
-        "Aberto 7 dias por semana (inclusive domingos)",
-        "Ambiente 100% climatizado",
-        "Sem taxa de matrícula ou anuidade"
+        "Acompanhamento de instrutores no salão"
       ],
       isPopular: false,
       whatsappMsg: "Olá! Gostaria de me matricular no Plano Mensal (R$ 90) da PowerFitt."
     },
     {
       id: "bimestral",
-      name: "Plano Bimestral",
-      badge: "2 Meses",
+      num: "02",
+      name: "PLANO BIMESTRAL",
       slogan: "O compromisso certo para ver resultados.",
-      price: "160",
-      cents: ",00",
-      period: "/total (2x R$ 80)",
-      installment: "Economize R$ 20 no período",
+      price: "160,00",
+      period: "/total",
+      installment: null,
       benefits: [
-        "Acesso livre à Musculação",
-        "Aulas de Dança e Ritmos inclusas",
         "Ficha de treino individualizada",
         "Acesso 7 dias por semana",
-        "Parcelamento no cartão de crédito",
-        "100% Climatizado"
+        "Parcelamento no cartão de crédito"
       ],
       isPopular: false,
       whatsappMsg: "Olá! Gostaria de saber mais sobre o Plano Bimestral (R$ 160) da PowerFitt."
     },
     {
       id: "trimestral",
-      name: "Plano Trimestral",
-      badge: "3 Meses",
+      num: "03",
+      name: "PLANO TRIMESTRAL",
       slogan: "Mais constância, mais evolução.",
-      price: "230",
-      cents: ",00",
-      period: "/total (3x R$ 76,66)",
-      installment: "Economize R$ 40 no período",
+      price: "230,00",
+      period: "/total",
+      installment: null,
       benefits: [
-        "Acesso livre à Musculação",
-        "Aulas de Dança e Ritmos inclusas",
         "Avaliação e atualização da ficha",
         "Acesso livre de segunda a domingo",
-        "Parcelamento em até 3x",
-        "Acompanhamento no salão"
+        "Parcelamento em até 3x"
       ],
       isPopular: false,
       whatsappMsg: "Olá! Gostaria de me matricular no Plano Trimestral (R$ 230) da PowerFitt."
     },
     {
       id: "semestral",
-      name: "Plano Semestral",
-      badge: "MAIS ESCOLHIDO 🔥",
+      num: "04",
+      name: "PLANO SEMESTRAL",
       slogan: "O melhor custo-benefício para o seu objetivo.",
-      price: "450",
-      cents: ",00",
-      period: "/total (6x R$ 75,00)",
-      installment: "Apenas R$ 75,00 por mês!",
+      price: "450,00",
+      period: "",
+      installment: "TOTAL (6X R$ 75,00)",
       benefits: [
-        "Maior economia: Economize R$ 90 no total",
-        "Acesso livre à Musculação",
-        "Aulas de Dança e Ritmos inclusas",
-        "Acompanhamento e evolução contínua",
-        "Parcelamento em até 6x no cartão",
-        "Acesso completo 7 dias por semana"
+        "Maior economia",
+        "Acesso completo 7 dias por semana",
+        "Acompanhamento e evolução contínua"
       ],
       isPopular: true,
       whatsappMsg: "Olá! Quero garantir a condição do Plano Semestral (R$ 450) da PowerFitt."
@@ -87,8 +71,13 @@ export default function Plans({ onOpenTrialModal }) {
   ];
 
   return (
-    <section id="planos" className="section-padding plans-redesigned-section">
-      <div className="container">
+    <section id="planos" className="section-padding plans-redesigned-section relative">
+      {/* BACKGROUND AMBIENT GLOW */}
+      <div className="plans-ambient-glow-layer pointer-events-none">
+        <div className="plans-ambient-glow-center"></div>
+      </div>
+
+      <div className="container relative z-10">
         {/* SECTION HEADER */}
         <div className="section-header-center">
           <div className="section-badge red-badge">
@@ -104,58 +93,71 @@ export default function Plans({ onOpenTrialModal }) {
           </p>
         </div>
 
-        {/* 4 PLANS GRID */}
-        <div className="official-plans-grid">
+        {/* 4 STITCH PRICING BENTO GRID */}
+        <div className="stitch-pricing-grid">
           {plans.map((plan) => (
             <div 
               key={plan.id}
-              className={`official-plan-card glass-card ${plan.isPopular ? "featured-plan" : ""}`}
+              className={`plan-pricing-card ${plan.isPopular ? "featured-pricing-card" : "regular-pricing-card"}`}
             >
+              {/* RADIAL PULSE HOVER LAYER */}
+              <div className="plan-bg-pulse"></div>
+
+              {/* POPULAR RIBBON BADGE */}
               {plan.isPopular && (
-                <div className="popular-ribbon">
-                  <Star size={13} className="fill-current" />
-                  <span>{plan.badge}</span>
+                <div className="plan-ribbon-tag">
+                  <Flame size={15} className="fill-current" />
+                  <span>MAIS ESCOLHIDO</span>
                 </div>
               )}
 
-              <div className="plan-card-header">
-                {!plan.isPopular && (
-                  <span className="plan-badge-pill">{plan.badge}</span>
-                )}
-                <h3 className="plan-title">{plan.name}</h3>
-                <p className="plan-slogan">"{plan.slogan}"</p>
+              {/* GIANT BACKGROUND OUTLINE WATERMARK NUMBER */}
+              <div className="plan-outline-num-giant">
+                {plan.num}
               </div>
 
-              <div className="plan-price-display">
-                <div className="price-main-line">
-                  <span className="price-symbol">R$</span>
-                  <span className="price-amount">{plan.price}</span>
-                  <span className="price-cents">{plan.cents}</span>
+              {/* CARD TOP CONTENT */}
+              <div className={`plan-card-body-wrap ${plan.isPopular ? "mt-4" : ""}`}>
+                <h3 className="plan-card-title">{plan.name}</h3>
+                <p className="plan-card-slogan">{plan.slogan}</p>
+
+                {/* PRICE ROW */}
+                <div className="plan-price-row">
+                  <span className="plan-price-currency">R$</span>
+                  <span className={`plan-price-val ${plan.isPopular ? "text-white drop-shadow-neon" : ""}`}>
+                    {plan.price}
+                  </span>
+                  {plan.period && (
+                    <span className="plan-price-period">{plan.period}</span>
+                  )}
                 </div>
-                <span className="price-period-label">{plan.period}</span>
-                <span className="price-installment-tag">{plan.installment}</span>
+
+                {/* INSTALLMENT HIGHLIGHT */}
+                {plan.installment && (
+                  <p className="plan-installment-label">{plan.installment}</p>
+                )}
+
+                {/* BENEFITS LIST */}
+                <ul className="plan-benefits-checklist">
+                  {plan.benefits.map((b, bIdx) => (
+                    <li key={bIdx} className="plan-benefit-item">
+                      <CheckCircle2 size={19} className="text-accent-red flex-shrink-0" />
+                      <span className={plan.isPopular && bIdx === 0 ? "text-white font-semibold" : ""}>
+                        {b}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="plan-card-divider"></div>
-
-              <div className="plan-features-list">
-                {plan.benefits.map((b, bIdx) => (
-                  <div key={bIdx} className="plan-feature-row">
-                    <div className="feature-check-dot">
-                      <Check size={13} className="text-white" />
-                    </div>
-                    <span>{b}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="plan-card-footer">
+              {/* ACTION BUTTON */}
+              <div className="plan-card-btn-wrap">
                 <button 
-                  className={`w-full ${plan.isPopular ? "btn-primary" : "btn-secondary"}`}
+                  className={`w-full plan-whatsapp-cta-btn ${plan.isPopular ? "btn-primary-glow" : "btn-secondary-outline"}`}
                   onClick={() => openWhatsApp(plan.whatsappMsg)}
                 >
                   <span>Matricular via WhatsApp</span>
-                  <ArrowRight size={16} />
+                  <ArrowRight size={17} className="btn-arrow-icon" />
                 </button>
               </div>
             </div>
@@ -163,9 +165,9 @@ export default function Plans({ onOpenTrialModal }) {
         </div>
 
         {/* CONVENIOS STRIP CALLOUT */}
-        <div className="plans-convenio-reminder glass-card">
+        <div className="plans-convenio-reminder glass-card neon-border-glow">
           <div className="reminder-text">
-            <ShieldCheck size={24} className="text-accent-red" />
+            <ShieldCheck size={26} className="text-accent-red flex-shrink-0" />
             <div>
               <h4>Possui convênio corporativo?</h4>
               <p>Aceitamos <strong>Wellhub (Gympass)</strong> e <strong>TotalPass</strong> sem burocracia para você treinar quando quiser.</p>
