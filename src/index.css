@@ -1,0 +1,356 @@
+/* CUSTOM LOCAL FONT: TYPO ROUND */
+@font-face {
+  font-family: 'Typo Round';
+  src: url('/fonts/typo_round/Typo_Round_Regular_Demo.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Typo Round';
+  src: url('/fonts/typo_round/Typo_Round_Bold_Demo.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Typo Round';
+  src: url('/fonts/typo_round/Typo_Round_Light_Demo.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-primary: #07080C;
+  --bg-secondary: #0D1017;
+  --bg-tertiary: #131822;
+  --bg-card: rgba(15, 19, 28, 0.78);
+  --bg-card-hover: rgba(22, 28, 42, 0.95);
+  --bg-glass: rgba(10, 12, 18, 0.9);
+  
+  --accent-red: #E50914;
+  --accent-red-hover: #ff1f2d;
+  --accent-red-glow: rgba(229, 9, 20, 0.35);
+  --accent-orange: #FF6B00;
+  
+  --text-primary: #F8FAFC;
+  --text-secondary: #A0ABC0;
+  --text-muted: #64748B;
+  --text-dark: #07080C;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --border-red: rgba(229, 9, 20, 0.45);
+  
+  --font-hero: 'Bebas Neue', 'Syne', sans-serif;
+  --font-display: 'Syne', 'Outfit', sans-serif;
+  --font-typo: 'Typo Round', 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 25px rgba(229, 9, 20, 0.35);
+}
+
+/* RESET & BASE */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-hero);
+  font-weight: normal;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+}
+
+/* CONTAINER & LAYOUT */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 100px 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+  .container {
+    padding: 0 18px;
+  }
+}
+
+/* BADGES & CHIPS */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(229, 9, 20, 0.08);
+  border: 1px solid rgba(229, 9, 20, 0.3);
+  color: #FF4D5E;
+  font-family: var(--font-typo);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+}
+
+.live-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-red);
+  box-shadow: 0 0 10px var(--accent-red);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7); }
+  70% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 0 8px rgba(229, 9, 20, 0); }
+  100% { transform: scale(0.95); opacity: 0.7; box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+}
+
+/* BUTTONS WITH TYPO ROUND FONT */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--accent-red);
+  color: #ffffff;
+  font-family: var(--font-typo);
+  font-weight: 700;
+  font-size: 0.96rem;
+  letter-spacing: 0.02em;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 20px rgba(229, 9, 20, 0.35);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background-color: #ff1f2d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(229, 9, 20, 0.55);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-typo);
+  font-weight: 700;
+  font-size: 0.94rem;
+  letter-spacing: 0.02em;
+  padding: 12px 26px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+  font-family: var(--font-typo);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-whatsapp:hover {
+  background-color: #20BA59;
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
+}
+
+/* CARDS & SURFACES */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.neon-border-glow {
+  position: relative;
+}
+
+.neon-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent-red), transparent 60%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* FLOATING WHATSAPP BUTTON */
+.floating-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #25D366;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+  font-family: var(--font-typo);
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: var(--transition-bounce);
+  animation: float-pulse 3s infinite ease-in-out;
+  position: relative;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes float-pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (max-width: 640px) {
+  .floating-whatsapp-btn {
+    padding: 14px;
+  }
+  .floating-whatsapp-btn span {
+    display: none;
+  }
+}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E2536;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-red);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.text-accent-red {
+  color: var(--accent-red);
+}
+
+.bg-accent-red {
+  background-color: var(--accent-red);
+}
