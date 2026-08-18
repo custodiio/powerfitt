@@ -17,11 +17,6 @@ export function getGymOpenStatus() {
   const minutes = brazilDate.getMinutes();
   const currentMinutes = hours * 60 + minutes;
 
-  // Day schedules in minutes from midnight
-  // Mon-Fri: 5:30 (330) to 22:30 (1350)
-  // Sat: 8:00 (480) to 16:00 (960)
-  // Sun: 9:00 (540) to 12:00 (720)
-
   let isOpen = false;
   let statusText = "";
   let detailText = "";
@@ -61,5 +56,5 @@ export function getGymOpenStatus() {
     }
   }
 
-  return { isOpen, statusText, detailText };
+  return { isOpen, statusText, detailText, currentDay: day };
 }

@@ -73,6 +73,8 @@ export default function ConveniosSection() {
                   src="/images/wellhub-logo.png" 
                   alt="Wellhub Gympass Logo" 
                   className="convenio-floating-logo wellhub-img"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -128,6 +130,8 @@ export default function ConveniosSection() {
                   src="/images/totalpass-logo.png" 
                   alt="TotalPass Logo" 
                   className="convenio-floating-logo totalpass-img"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -195,21 +199,34 @@ export default function ConveniosSection() {
           })}
         </div>
 
-        {/* BOTTOM MOTIVATIONAL STRIP */}
-        <div className="convenios-slogan-strip glass-card neon-border-glow">
-          <div className="slogan-text">
-            <span className="slogan-pre">TREINAMENTO DE VERDADE NO PARQUE DOM MIGUEL</span>
-            <h3 className="slogan-main">
-              VENHA VIVER A EXPERIÊNCIA <span className="text-accent-red">POWERFITT</span>
-            </h3>
+        {/* BOTTOM MOTIVATIONAL STRIP (STITCH BENTO DESIGN) */}
+        <div className="stat-card stitch-cta-banner convenios-slogan-stitch-banner">
+          <div className="bg-pulse"></div>
+          <div className="stitch-cta-ambient-glow"></div>
+          
+          <div className="stitch-cta-inner-wrap">
+            <div className="stitch-cta-left-content">
+              <div className="stitch-cta-icon-box">
+                <Sparkles size={26} className="text-accent-red" />
+              </div>
+              <div className="stitch-cta-text-box">
+                <div className="stitch-cta-header-line">
+                  <span className="stitch-cta-pre-tag">TREINAMENTO DE VERDADE NO PARQUE DOM MIGUEL</span>
+                </div>
+                <h3 className="stitch-cta-title">
+                  VENHA VIVER A EXPERIÊNCIA <span className="text-accent-red">POWERFITT</span>
+                </h3>
+              </div>
+            </div>
+            
+            <button 
+              className="btn-primary stitch-cta-action-btn"
+              onClick={() => openWhatsApp("Olá! Gostaria de conhecer a PowerFitt Academia e agendar um horário.")}
+            >
+              <span>Falar com Atendimento</span>
+              <ArrowRight size={18} />
+            </button>
           </div>
-          <button 
-            className="btn-primary"
-            onClick={() => openWhatsApp("Olá! Gostaria de conhecer a PowerFitt Academia e agendar um horário.")}
-          >
-            <span>Falar com Atendimento</span>
-            <ArrowRight size={18} />
-          </button>
         </div>
       </div>
     </section>

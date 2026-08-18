@@ -20,11 +20,11 @@
   --border-card: rgba(255, 255, 255, 0.12);
   --border-red: rgba(229, 9, 20, 0.45);
   
-  /* ATHLETIC PROFESSIONAL FONT PAIRING */
-  --font-impact: 'Bebas Neue', 'Teko', sans-serif;
-  --font-support: 'Barlow Condensed', 'Archivo Black', sans-serif;
+  /* ATHLETIC PROFESSIONAL FONT PAIRING WITH CONDENSED FALLBACKS */
+  --font-impact: 'Bebas Neue', 'Teko', 'Impact', 'Arial Narrow', sans-serif;
+  --font-support: 'Barlow Condensed', 'Archivo Black', 'Arial Narrow', sans-serif;
   --font-reading: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-cta: 'Teko', 'Barlow Condensed', sans-serif;
+  --font-cta: 'Teko', 'Barlow Condensed', 'Impact', sans-serif;
   
   --font-hero: var(--font-impact);
   --font-display: var(--font-support);
@@ -54,6 +54,14 @@
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
+  scroll-padding-top: 80px;
+}
+
+/* Custom ultra-smooth scroll for modern browsers */
+@supports (scrollbar-gutter: stable) {
+  html {
+    scrollbar-gutter: stable;
+  }
 }
 
 body {
@@ -64,12 +72,48 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* GPU-ACCELERATED SECTIONS FOR SMOOTHER SCROLL */
+section, footer {
+  will-change: auto;
+  contain: layout style;
 }
 
 img, video {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* OPTIMIZED IMAGE — BLUR-UP LAZY LOAD */
+.optimized-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.optimized-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+.img-loading {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.img-loaded {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* CONTENT VISIBILITY — SKIP RENDERING OF OFF-SCREEN SECTIONS */
+.powerfitt-app > main > div {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 a {

@@ -1,215 +1,503 @@
-import React, { useState, useEffect } from "react";
-import { Play, ExternalLink, Heart, MessageCircle, Send, Bookmark, Music, Volume2, Sparkles, Zap } from "lucide-react";
+import React, { useState } from "react";
+import { ExternalLink, Heart, MessageCircle, Users, Film, Dumbbell, Tag, Sparkles, Award } from "lucide-react";
 import InstagramIcon from "./InstagramIcon";
+import { getInstagramStats } from "../utils/instagramStats";
 
 export default function InstagramReelsSection() {
-  const [likesCount, setLikesCount] = useState(482);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const stats = getInstagramStats();
 
-  const reelUrl = "https://www.instagram.com/reel/DLKWOSZuwEx/";
-  const reelEmbed = "https://www.instagram.com/reel/DLKWOSZuwEx/embed/";
-
-  const handleLike = () => {
-    if (!isLiked) {
-      setLikesCount(prev => prev + 1);
-      setIsLiked(true);
-    } else {
-      setLikesCount(prev => prev - 1);
-      setIsLiked(false);
-    }
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    setMousePos({ x, y });
   };
 
-  return (
-    <section id="reels" className="section-padding reels-showcase-section">
-      <div className="container">
-        {/* SECTION HEADER */}
-        <div className="section-header-center">
-          <div className="section-badge red-badge">
-            <InstagramIcon size={16} />
-            <span>INSTAGRAM REELS • @POWERFITT.ACADEMIA</span>
-          </div>
-          <h2 className="section-title">
-            VIVA A ENERGIA DOS <span className="text-accent-red">NOSSOS TREINOS</span>
-          </h2>
-          <p className="section-subtitle">
-            Acompanhe em primeira mão a motivação, aparelhos e o dia a dia dos nossos alunos direto pelo Reels oficial.
-          </p>
-        </div>
+  const handleMouseLeave = () => {
+    setMousePos({ x: 0, y: 0 });
+  };
 
-        {/* REELS SHOWCASE DISPLAY */}
-        <div className="reels-editorial-layout">
-          {/* LEFT: 9:16 SMARTPHONE MOCKUP */}
-          <div className="phone-mockup-wrapper">
-            <div className="phone-device-frame">
-              {/* Dynamic Island / Notch */}
-              <div className="phone-dynamic-island">
-                <span className="phone-camera-lens"></span>
+  const instagramProfileUrl = "https://www.instagram.com/powerfitt.academia/";
+
+  const posts = [
+    // Column 1 (2 posts)
+    {
+      id: 1,
+      image: "/images/insta/623016302_18084882149330741_7733933975978133643_n.jpg",
+      caption: "PERSISTÊNCIA, PROGRESSO E RESULTADO.",
+      likes: "2,4K",
+      comments: "72",
+      heightClass: "card-h-tall"
+    },
+    {
+      id: 2,
+      image: "/images/insta/626219146_18091749611095573_7647902473012270390_n.jpg",
+      caption: "RESULTADOS REAIS DE PESSOAS REAIS.",
+      likes: "2,3K",
+      comments: "58",
+      heightClass: "card-h-compact"
+    },
+    // Column 2 (2 posts - Center)
+    {
+      id: 3,
+      image: "/images/insta/623842772_18084857998929122_4823090371910835701_n.jpg",
+      caption: "PLAY NO PROJETO: SUPERE SEUS LIMITES!",
+      likes: "3,1K",
+      comments: "94",
+      heightClass: "card-h-medium"
+    },
+    {
+      id: 4,
+      image: "/images/insta/640392746_18093886469095573_4669562654762331703_n.jpg",
+      caption: "MUDE SUA ROTINA, TRANSFORME SUA VIDA.",
+      likes: "4,2K",
+      comments: "128",
+      heightClass: "card-h-tall insta-card-featured"
+    },
+    // Column 3 (2 posts - Right)
+    {
+      id: 5,
+      image: "/images/insta/640136620_18565278127018813_3924115431159537064_n.jpg",
+      caption: "MUSCULAÇÃO PARA O SEU DIA A DIA.",
+      likes: "3,8K",
+      comments: "115",
+      heightClass: "card-h-tall"
+    },
+    {
+      id: 6,
+      image: "/images/insta/640395380_18571394956007498_7486707819919364956_n.jpg",
+      caption: "TREINO COM PESOS E ALTA INTENSIDADE.",
+      likes: "1,9K",
+      comments: "46",
+      heightClass: "card-h-compact"
+    }
+  ];
+
+  const highlights = [
+    {
+      num: "01",
+      icon: Dumbbell,
+      title: "TREINOS E DICAS",
+      desc: "Dicas de execução, postura e motivação prática para sua rotina de treino."
+    },
+    {
+      num: "02",
+      icon: Users,
+      title: "ALUNOS REAIS",
+      desc: "Histórias de superação, evolução física e conquistas de quem treina conosco."
+    },
+    {
+      num: "03",
+      icon: InstagramIcon,
+      title: "BASTIDORES",
+      desc: "A rotina da academia, novos equipamentos e o ambiente da nossa unidade."
+    },
+    {
+      num: "04",
+      icon: Tag,
+      title: "OFERTAS EXCLUSIVAS",
+      desc: "Benefícios, promoções e novidades divulgados em primeira mão no perfil."
+    }
+  ];
+
+  return (
+    <section id="instagram-feed" className="section-padding insta-showcase-section relative overflow-hidden">
+      <div id="reels" className="absolute -top-24"></div>
+      {/* ATMOSPHERIC BACKGROUND LIGHTING */}
+      <div className="insta-bg-glow-layer pointer-events-none">
+        <div className="insta-bg-glow-blob top-left"></div>
+        <div className="insta-bg-glow-blob center-right"></div>
+      </div>
+
+      <div className="container relative z-10">
+        {/* BALANCED 2-COLUMN HERO DISPLAY */}
+        <div 
+          className="insta-main-grid-layout"
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          {/* LEFT COLUMN: HERO HEADLINE & STATS & CTA */}
+          <div className="insta-hero-content-col">
+            <div className="section-badge red-badge mb-1">
+              <InstagramIcon size={15} />
+              <span>INSTAGRAM • @POWERFITT.ACADEMIA</span>
+            </div>
+
+            <h2 className="section-title text-left mb-3 leading-none">
+              A ENERGIA <br />
+              <span className="text-white">DOS </span>
+              <span className="text-accent-red">NOSSOS</span> <br />
+              <span className="text-accent-red">TREINOS</span>
+            </h2>
+
+            <p className="section-subtitle text-left mb-4">
+              Fique por dentro da rotina da academia, conheça a evolução dos nossos alunos, novidades e eventos da unidade Parque Dom Miguel.
+            </p>
+
+            {/* STATS STRIP CARD (DYNAMIC FROM REAL PROFILE STATS) */}
+            <div className="insta-stats-glass-card">
+              <div className="insta-stat-item">
+                <div className="insta-stat-icon-wrap">
+                  <Users size={16} className="text-accent-red" />
+                </div>
+                <div className="insta-stat-meta">
+                  <span className="stat-value">{stats.followers}</span>
+                  <span className="stat-label">SEGUIDORES</span>
+                </div>
               </div>
 
-              {/* PHONE SCREEN CONTENT */}
-              <div className="phone-screen-inner">
-                {/* DARK MODE INSTAGRAM TOPBAR */}
-                <div className="instagram-dark-topbar">
-                  <span className="insta-top-brand">Reels</span>
-                  <div className="insta-top-icons">
-                    <span className="insta-sound-pill">
-                      <Volume2 size={14} />
-                    </span>
-                  </div>
+              <div className="insta-stat-divider"></div>
+
+              <div className="insta-stat-item">
+                <div className="insta-stat-icon-wrap">
+                  <Film size={16} className="text-accent-red" />
                 </div>
+                <div className="insta-stat-meta">
+                  <span className="stat-value">{stats.posts}</span>
+                  <span className="stat-label">POSTS</span>
+                </div>
+              </div>
 
-                {/* 9:16 REEL CONTAINER */}
-                <div className="reels-video-container">
-                  <iframe
-                    src={reelEmbed}
-                    className="reels-iframe-9-16"
-                    title="PowerFitt Academia Instagram Reel"
-                    frameBorder="0"
-                    scrolling="no"
-                    allowTransparency="true"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  ></iframe>
+              <div className="insta-stat-divider"></div>
 
-                  {/* BOTTOM REEL OVERLAY */}
-                  <div className="reels-bottom-overlay">
-                    <div className="reels-author-row">
-                      <img 
-                        src="/images/logo.png" 
-                        alt="PowerFitt Avatar" 
-                        className="reels-author-avatar"
-                      />
-                      <div className="reels-author-meta">
-                        <div className="reels-handle-line">
-                          <span className="reels-handle">powerfitt.academia</span>
-                          <span className="verified-dot">✓</span>
+              <div className="insta-stat-item">
+                <div className="insta-stat-icon-wrap">
+                  <Award size={16} className="text-accent-red" />
+                </div>
+                <div className="insta-stat-meta">
+                  <span className="stat-value">{stats.historyYears}</span>
+                  <span className="stat-label">HISTÓRIA</span>
+                </div>
+              </div>
+            </div>
+
+            {/* FOLLOW PROFILE CTA BUTTON */}
+            <div className="insta-cta-wrap">
+              <a 
+                href={instagramProfileUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-primary insta-follow-cta-btn"
+              >
+                <InstagramIcon size={20} />
+                <span>SEGUE A GENTE LÁ!</span>
+                <ExternalLink size={18} />
+              </a>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: 3D PERSPECTIVE GRID (2, 2, 2 ASSYMETRIC BENTO) & MULTI-LAYER 3D ICONS */}
+          <div className="insta-3d-grid-wrapper">
+            {/* ============================================================ */}
+            {/* LAYER 1: 3D ICONS BEHIND THE GRID (Peeking from behind cards) */}
+            {/* ============================================================ */}
+
+            {/* Behind 1: 3D Save Bookmark (Top Center behind Column 1/2) */}
+            <div 
+              className="insta-floating-3d-badge bg-layer-badge save-behind-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * -8}px, ${mousePos.y * -8}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/salvar.png" 
+                alt="3D Salvar" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            {/* Behind 2: 3D Instagram Logo (Bottom Center behind Column 2/3) */}
+            <div 
+              className="insta-floating-3d-badge bg-layer-badge logo-behind-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * -14}px, ${mousePos.y * -14}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/instagram_logo.png" 
+                alt="3D Instagram Logo" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            {/* Behind 3: 3D Coração Invertido (Bottom Right behind Column 3) */}
+            <div 
+              className="insta-floating-3d-badge bg-layer-badge heart-inv-behind-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * -16}px, ${mousePos.y * -16}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/coracao_inv.png" 
+                alt="3D Coração" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            {/* ============================================================ */}
+            {/* LAYER 2: 3D TILTED POSTS CONTAINER (2, 2, 2 ASSYMETRIC BENTO) */}
+            {/* ============================================================ */}
+            <div 
+              className="insta-perspective-container"
+              style={{
+                transform: `perspective(1400px) rotateY(${-10 + mousePos.x * 5}deg) rotateX(${3 - mousePos.y * 5}deg)`
+              }}
+            >
+              <div className="insta-cards-3col-grid">
+                {/* COLUMN 1 (2 POSTS) */}
+                <div className="insta-cards-col col-1">
+                  {/* Card 1 (Tall) */}
+                  <a 
+                    href={instagramProfileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`insta-post-card ${posts[0].heightClass} group`}
+                  >
+                    <div className="insta-card-img-wrap">
+                      <img src={posts[0].image} alt={posts[0].caption} className="insta-card-img" loading="lazy" decoding="async" />
+                      <div className="insta-reels-badge">
+                        <Film size={14} />
+                      </div>
+                      <div className="insta-card-gradient-overlay"></div>
+                      <div className="insta-card-content-bottom">
+                        <p className="insta-card-caption">{posts[0].caption}</p>
+                        <div className="insta-card-engagement-row">
+                          <span className="engage-item"><Heart size={13} className="fill-current" /> {posts[0].likes}</span>
+                          <span className="engage-item"><MessageCircle size={13} /> {posts[0].comments}</span>
                         </div>
-                        <a 
-                          href="https://www.instagram.com/powerfitt.academia/" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="reels-follow-btn"
-                        >
-                          Seguir
-                        </a>
                       </div>
                     </div>
+                  </a>
 
-                    <p className="reels-caption-text">
-                      Venha treinar e evoluir com a gente! 💪🔥 Treinamento pesado, aparelhos novos e comunidade focada. #PowerFitt #RioVerde
-                    </p>
+                  {/* Card 2 (Compact) */}
+                  <a 
+                    href={instagramProfileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`insta-post-card ${posts[1].heightClass} group`}
+                  >
+                    <div className="insta-card-img-wrap">
+                      <img src={posts[1].image} alt={posts[1].caption} className="insta-card-img" loading="lazy" decoding="async" />
+                      <div className="insta-reels-badge">
+                        <Film size={14} />
+                      </div>
+                      <div className="insta-card-gradient-overlay"></div>
+                      <div className="insta-card-content-bottom">
+                        <p className="insta-card-caption">{posts[1].caption}</p>
+                        <div className="insta-card-engagement-row">
+                          <span className="engage-item"><Heart size={13} className="fill-current" /> {posts[1].likes}</span>
+                          <span className="engage-item"><MessageCircle size={13} /> {posts[1].comments}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
 
-                    <div className="reels-audio-track">
-                      <Music size={12} className="text-accent-red animate-spin" />
-                      <span>Áudio Original • PowerFitt Academia</span>
+                {/* COLUMN 2 (2 POSTS - CENTER) */}
+                <div className="insta-cards-col col-center">
+                  {/* Card 3 (Medium) */}
+                  <a 
+                    href={instagramProfileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`insta-post-card ${posts[2].heightClass} group`}
+                  >
+                    <div className="insta-card-img-wrap">
+                      <img src={posts[2].image} alt={posts[2].caption} className="insta-card-img" loading="lazy" decoding="async" />
+                      <div className="insta-reels-badge">
+                        <Film size={14} />
+                      </div>
+                      <div className="insta-card-gradient-overlay"></div>
+                      <div className="insta-card-content-bottom">
+                        <p className="insta-card-caption">{posts[2].caption}</p>
+                        <div className="insta-card-engagement-row">
+                          <span className="engage-item"><Heart size={13} className="fill-current text-accent-red" /> {posts[2].likes}</span>
+                          <span className="engage-item"><MessageCircle size={13} /> {posts[2].comments}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+
+                  {/* Card 4 (Tall Featured) */}
+                  <a 
+                    href={instagramProfileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`insta-post-card ${posts[3].heightClass} group`}
+                  >
+                    <div className="insta-card-img-wrap">
+                      <img src={posts[3].image} alt={posts[3].caption} className="insta-card-img" loading="lazy" decoding="async" />
+                      <div className="insta-reels-badge">
+                        <Film size={14} />
+                      </div>
+                      <div className="insta-card-gradient-overlay"></div>
+                      <div className="insta-card-content-bottom">
+                        <p className="insta-card-caption">{posts[3].caption}</p>
+                        <div className="insta-card-engagement-row">
+                          <span className="engage-item"><Heart size={13} className="fill-current" /> {posts[3].likes}</span>
+                          <span className="engage-item"><MessageCircle size={13} /> {posts[3].comments}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+
+                {/* COLUMN 3 (2 POSTS - RIGHT) */}
+                <div className="insta-cards-col col-3">
+                  {/* Card 5 (Tall) */}
+                  <a 
+                    href={instagramProfileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`insta-post-card ${posts[4].heightClass} group`}
+                  >
+                    <div className="insta-card-img-wrap">
+                      <img src={posts[4].image} alt={posts[4].caption} className="insta-card-img" loading="lazy" decoding="async" />
+                      <div className="insta-reels-badge">
+                        <Film size={14} />
+                      </div>
+                      <div className="insta-card-gradient-overlay"></div>
+                      <div className="insta-card-content-bottom">
+                        <p className="insta-card-caption">{posts[4].caption}</p>
+                        <div className="insta-card-engagement-row">
+                          <span className="engage-item"><Heart size={13} className="fill-current" /> {posts[4].likes}</span>
+                          <span className="engage-item"><MessageCircle size={13} /> {posts[4].comments}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+
+                  {/* Card 6 (Compact) */}
+                  <a 
+                    href={instagramProfileUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`insta-post-card ${posts[5].heightClass} group`}
+                  >
+                    <div className="insta-card-img-wrap">
+                      <img src={posts[5].image} alt={posts[5].caption} className="insta-card-img" loading="lazy" decoding="async" />
+                      <div className="insta-reels-badge">
+                        <Film size={14} />
+                      </div>
+                      <div className="insta-card-gradient-overlay"></div>
+                      <div className="insta-card-content-bottom">
+                        <p className="insta-card-caption">{posts[5].caption}</p>
+                        <div className="insta-card-engagement-row">
+                          <span className="engage-item"><Heart size={13} className="fill-current" /> {posts[5].likes}</span>
+                          <span className="engage-item"><MessageCircle size={13} /> {posts[5].comments}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* ============================================================ */}
+            {/* LAYER 3: 3D ICONS IN FRONT (Foreground with glow and opacity 1) */}
+            {/* ============================================================ */}
+
+            {/* Front 1: 3D Curtida 1K (Top Left - Sharp + Glow) */}
+            <div 
+              className="insta-floating-3d-badge fg-layer-badge like-1k-front-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * 12}px, ${mousePos.y * 12}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/curtida_1k.png" 
+                alt="3D Curtida 1K" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            {/* Front 2: 3D Coração (Top Right - Sharp + Glow) */}
+            <div 
+              className="insta-floating-3d-badge fg-layer-badge heart-front-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * 14}px, ${mousePos.y * 14}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/coracao.png" 
+                alt="3D Coração" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            {/* Front 3: 3D Notificação (Middle Right - Sharp + Glow) */}
+            <div 
+              className="insta-floating-3d-badge fg-layer-badge notif-front-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * 16}px, ${mousePos.y * 16}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/notificacao.png" 
+                alt="3D Notificação" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            {/* Front 4: 3D Comentário (Bottom Left/Center - Light Blur 0.8px + Glow) */}
+            <div 
+              className="insta-floating-3d-badge fg-layer-badge comment-front-badge"
+              style={{
+                transform: `translate3d(${mousePos.x * 10}px, ${mousePos.y * 10}px, 0)`
+              }}
+            >
+              <img 
+                src="/images/insta_3d/comentario.png" 
+                alt="3D Comentário" 
+                className="floating-3d-img"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* BOTTOM 4 STITCH BENTO CARDS (MATCHING SITE DESIGN & EFFECTS) */}
+        <div className="insta-bottom-bento-grid">
+          {highlights.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.num} className="stat-card insta-bento-stitch-card">
+                {/* RADIAL PULSE HOVER LAYER */}
+                <div className="bg-pulse"></div>
+
+                {/* GIANT BACKGROUND WATERMARK OUTLINE NUMBER */}
+                <div className="stat-card-outline-num">{item.num}</div>
+
+                <div className="stat-card-content insta-bento-content-box">
+                  {/* TOP HEADER ROW WITH ACCENT BAR & GLOWING ICON */}
+                  <div className="pillar-header-row mb-3">
+                    <div className="stat-card-red-bar"></div>
+                    <div className="pillar-icon-glow-wrap">
+                      <Icon size={18} className="text-accent-red" />
                     </div>
                   </div>
 
-                  {/* RIGHT ACTION BUTTONS */}
-                  <div className="reels-side-actions">
-                    <button 
-                      className={`reels-action-btn ${isLiked ? "liked" : ""}`}
-                      onClick={handleLike}
-                      aria-label="Curtir"
-                    >
-                      <Heart size={24} className={isLiked ? "fill-current text-accent-red" : ""} />
-                      <span>{likesCount}</span>
-                    </button>
-
-                    <a 
-                      href={reelUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="reels-action-btn"
-                      aria-label="Comentar"
-                    >
-                      <MessageCircle size={24} />
-                      <span>Comentar</span>
-                    </a>
-
-                    <a 
-                      href={reelUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="reels-action-btn"
-                      aria-label="Compartilhar"
-                    >
-                      <Send size={24} />
-                      <span>Enviar</span>
-                    </a>
-
-                    <button 
-                      className={`reels-action-btn ${isSaved ? "saved" : ""}`}
-                      onClick={() => setIsSaved(!isSaved)}
-                      aria-label="Salvar"
-                    >
-                      <Bookmark size={24} className={isSaved ? "fill-current text-white" : ""} />
-                      <span>Salvar</span>
-                    </button>
-                  </div>
+                  {/* TITLE & DESCRIPTION */}
+                  <h4 className="insta-bento-stitch-title">{item.title}</h4>
+                  <p className="stat-card-desc insta-bento-desc-text">{item.desc}</p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* RIGHT: EDITORIAL CONTEXT & INSTAGRAM CTA */}
-          <div className="reels-context-col glass-card">
-            <div className="reels-profile-card">
-              <img 
-                src="/images/logo.png" 
-                alt="PowerFitt Oficial" 
-                className="reels-profile-logo"
-              />
-              <div className="reels-profile-info">
-                <div className="reels-profile-name-row">
-                  <span className="profile-handle">@powerfitt.academia</span>
-                  <span className="verified-badge">✓</span>
-                </div>
-                <p className="profile-bio-summary">
-                  🏋️‍♀️ Transformando vidas há mais de 4 anos no Parque Dom Miguel.<br />
-                  🤝 Planos acessíveis a partir de R$ 90 e treino para todos!
-                </p>
-                <div className="profile-stats-row">
-                  <div className="p-stat"><strong>48</strong> <span>posts</span></div>
-                  <div className="p-stat"><strong>+4.490</strong> <span>seguidores</span></div>
-                  <div className="p-stat"><strong>887</strong> <span>seguindo</span></div>
-                </div>
-              </div>
-            </div>
-
-            <div className="reels-features-box">
-              <h4 className="features-box-title">O que você encontra no nosso feed:</h4>
-              <ul className="reels-bullet-list">
-                <li>✓ Dicas semanais de execução correta e postura com os professores</li>
-                <li>✓ Desafios, eventos especiais e aulas coletivas de dança</li>
-                <li>✓ Evolução real e bastidores de treinos dos nossos alunos</li>
-                <li>✓ Atualizações de horários, feriados e novos equipamentos</li>
-              </ul>
-            </div>
-
-            <div className="reels-action-buttons-group">
-              <a 
-                href={reelUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="btn-primary flex-1"
-              >
-                <Play size={18} />
-                <span>Assistir no Instagram</span>
-                <ExternalLink size={16} />
-              </a>
-
-              <a 
-                href="https://www.instagram.com/powerfitt.academia/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="btn-secondary"
-              >
-                <InstagramIcon size={18} />
-                <span>Seguir Perfil</span>
-              </a>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

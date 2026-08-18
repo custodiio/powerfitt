@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
+import { ScrollReveal } from "./hooks/useScrollReveal";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import StructureCarousel from "./components/StructureCarousel";
-import Modalities from "./components/Modalities";
-import ConveniosSection from "./components/ConveniosSection";
-import InstagramReelsSection from "./components/InstagramReelsSection";
-import Plans from "./components/Plans";
-import Reviews from "./components/Reviews";
-import LocationSchedule from "./components/LocationSchedule";
-import Faq from "./components/Faq";
-import Footer from "./components/Footer";
 import TrialModal from "./components/TrialModal";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import "./App.css";
+
+/* LAZY LOAD SECTIONS BELOW THE FOLD FOR FASTER INITIAL PAINT */
+const StructureCarousel = lazy(() => import("./components/StructureCarousel"));
+const Modalities = lazy(() => import("./components/Modalities"));
+const ConveniosSection = lazy(() => import("./components/ConveniosSection"));
+const InstagramReelsSection = lazy(() => import("./components/InstagramReelsSection"));
+const Plans = lazy(() => import("./components/Plans"));
+const Reviews = lazy(() => import("./components/Reviews"));
+const LocationSchedule = lazy(() => import("./components/LocationSchedule"));
+const TransformationCta = lazy(() => import("./components/TransformationCta"));
+const Faq = lazy(() => import("./components/Faq"));
+const Footer = lazy(() => import("./components/Footer"));
+
+/* Minimal loading fallback - invisible placeholder to avoid layout shifts */
+const SectionFallback = () => <div style={{ minHeight: "200px" }} />;
 
 export default function App() {
   const [trialModalOpen, setTrialModalOpen] = useState(false);
@@ -24,36 +31,52 @@ export default function App() {
 
       {/* MAIN CONTENT */}
       <main>
-        {/* HERO SECTION WITH FACADE & EDITORIAL STATS */}
+        {/* HERO - LOADS IMMEDIATELY (ABOVE THE FOLD) */}
         <Hero onOpenTrialModal={() => setTrialModalOpen(true)} />
 
-        {/* AUTOMATIC REAL PHOTO STRUCTURE CAROUSEL */}
-        <StructureCarousel />
+        {/* ALL SECTIONS BELOW THE FOLD: LAZY LOADED + SCROLL REVEAL */}
+        <Suspense fallback={<SectionFallback />}>
+          <ScrollReveal>
+            <StructureCarousel />
+          </ScrollReveal>
 
-        {/* MODALITIES & TRAINING (MUSCULAÇÃO & DANÇA) */}
-        <Modalities onOpenTrialModal={() => setTrialModalOpen(true)} />
+          <ScrollReveal delay={50}>
+            <Modalities onOpenTrialModal={() => setTrialModalOpen(true)} />
+          </ScrollReveal>
 
-        {/* CONVENIOS CORPORATIVOS (WELLHUB, GYMPASS, TOTALPASS) */}
-        <ConveniosSection />
+          <ScrollReveal delay={50}>
+            <ConveniosSection />
+          </ScrollReveal>
 
-        {/* 9:16 INSTAGRAM REELS SHOWCASE */}
-        <InstagramReelsSection />
+          <ScrollReveal delay={50}>
+            <InstagramReelsSection />
+          </ScrollReveal>
 
-        {/* OFFICIAL PLANS & PRICES */}
-        <Plans onOpenTrialModal={() => setTrialModalOpen(true)} />
+          <ScrollReveal delay={50}>
+            <Plans onOpenTrialModal={() => setTrialModalOpen(true)} />
+          </ScrollReveal>
 
-        {/* GOOGLE MAPS 5-STAR REVIEWS */}
-        <Reviews />
+          <ScrollReveal delay={50}>
+            <Reviews />
+          </ScrollReveal>
 
-        {/* LOCATION & LIVE SCHEDULE (DARK MAP) */}
-        <LocationSchedule />
+          <ScrollReveal delay={50}>
+            <LocationSchedule />
+          </ScrollReveal>
 
-        {/* FREQUENTLY ASKED QUESTIONS */}
-        <Faq />
+          <ScrollReveal delay={50}>
+            <TransformationCta onOpenTrialModal={() => setTrialModalOpen(true)} />
+          </ScrollReveal>
+
+          <ScrollReveal delay={50}>
+            <Faq />
+          </ScrollReveal>
+
+          <ScrollReveal delay={50}>
+            <Footer onOpenTrialModal={() => setTrialModalOpen(true)} />
+          </ScrollReveal>
+        </Suspense>
       </main>
-
-      {/* FOOTER */}
-      <Footer onOpenTrialModal={() => setTrialModalOpen(true)} />
 
       {/* FLOATING CTA & TRIAL MODAL */}
       <FloatingWhatsApp />

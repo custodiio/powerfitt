@@ -33,6 +33,7 @@ export default function Navbar({ onOpenTrialModal }) {
         {/* DESKTOP NAVIGATION */}
         <nav className="navbar-nav desktop-only">
           <a href="#estrutura" className="nav-link">Estrutura</a>
+          <a href="#instagram-feed" className="nav-link">Feed & Reels</a>
           <a href="#planos" className="nav-link">Planos & Preços</a>
           <a href="#avaliacoes" className="nav-link">Avaliações</a>
           <a href="#localizacao" className="nav-link">Localização</a>
@@ -65,10 +66,12 @@ export default function Navbar({ onOpenTrialModal }) {
         <div className="mobile-menu-drawer fade-in">
           <div className="mobile-nav-links">
             <a href="#estrutura" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Estrutura & Fotos</a>
-            <a href="#planos" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Planos e Valores</a>
-            <a href="#avaliacoes" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Depoimentos 5★ Google</a>
+            <a href="#instagram-feed" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Feed & Reels</a>
+            <a href="#modalidades" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Modalidades</a>
+            <a href="#planos" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Planos & Preços</a>
+            <a href="#avaliacoes" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Avaliações</a>
             <a href="#localizacao" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Localização & Horários</a>
-            <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Dúvidas Frequentes</a>
+            <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="mobile-link">Perguntas Frequentes</a>
           </div>
 
           <div className="mobile-menu-cta">

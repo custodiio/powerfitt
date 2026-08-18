@@ -61,6 +61,8 @@ export default function Hero({ onOpenTrialModal }) {
             src="/images/boa2.png" 
             alt="Estrutura e Maquinário PowerFitt Academia Rio Verde"
             className="hero-bg-image"
+            fetchPriority="high"
+            decoding="async"
           />
           {/* SOFT CENTER ELLIPSE TO PREVENT TEXT CLASH WITHOUT CRUSHING SIDES */}
           <div className="hero-center-dark-ellipse"></div>

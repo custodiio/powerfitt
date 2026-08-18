@@ -164,19 +164,35 @@ export default function Plans({ onOpenTrialModal }) {
           ))}
         </div>
 
-        {/* CONVENIOS STRIP CALLOUT */}
-        <div className="plans-convenio-reminder glass-card neon-border-glow">
-          <div className="reminder-text">
-            <ShieldCheck size={26} className="text-accent-red flex-shrink-0" />
-            <div>
-              <h4>Possui convênio corporativo?</h4>
-              <p>Aceitamos <strong>Wellhub (Gympass)</strong> e <strong>TotalPass</strong> sem burocracia para você treinar quando quiser.</p>
+        {/* CONVENIOS STRIP CALLOUT (STITCH BENTO DESIGN) */}
+        <div className="stat-card stitch-cta-banner plans-convenio-stitch-banner">
+          <div className="bg-pulse"></div>
+          <div className="stitch-cta-ambient-glow"></div>
+          
+          <div className="stitch-cta-inner-wrap">
+            <div className="stitch-cta-left-content">
+              <div className="stitch-cta-icon-box">
+                <ShieldCheck size={26} className="text-accent-red" />
+              </div>
+              <div className="stitch-cta-text-box">
+                <div className="stitch-cta-header-line">
+                  <h4 className="stitch-cta-title">Possui convênio corporativo?</h4>
+                  <div className="convenio-mini-tags-group">
+                    <span className="convenio-mini-pill wellhub-pill">Wellhub (Gympass)</span>
+                    <span className="convenio-mini-pill totalpass-pill">TotalPass</span>
+                  </div>
+                </div>
+                <p className="stitch-cta-desc">
+                  Treine na PowerFitt sem burocracia ou taxas adicionais. Faça check-in direto pelo app do seu convênio e comece a treinar hoje mesmo.
+                </p>
+              </div>
             </div>
+            
+            <a href="#convenios" className="btn-secondary stitch-cta-action-btn">
+              <span>Ver Detalhes dos Convênios</span>
+              <ArrowRight size={18} />
+            </a>
           </div>
-          <a href="#convenios" className="btn-secondary">
-            <span>Ver Detalhes dos Convênios</span>
-            <ArrowRight size={16} />
-          </a>
         </div>
       </div>
     </section>

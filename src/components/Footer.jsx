@@ -14,29 +14,6 @@ export default function Footer({ onOpenTrialModal }) {
   return (
     <footer className="footer-section">
       <div className="container">
-        {/* TOP CTA BANNER */}
-        <div className="footer-cta-banner glass-card neon-border-glow">
-          <div className="footer-cta-content">
-            <h3 className="footer-cta-title">
-              PRONTO PARA TRANSFORMAR SEU CORPO NA <span className="text-accent-red">POWERFITT</span>?
-            </h3>
-            <p className="footer-cta-sub">
-              Dê o primeiro passo hoje. Agende sua aula experimental gratuita ou fale com a nossa equipe no WhatsApp.
-            </p>
-          </div>
-          <div className="footer-cta-actions">
-            <button className="btn-primary" onClick={onOpenTrialModal}>
-              Agendar Aula Grátis
-            </button>
-            <button 
-              className="btn-secondary"
-              onClick={() => openWhatsApp("Olá! Quero conhecer mais sobre a PowerFitt Academia.")}
-            >
-              Falar no WhatsApp
-            </button>
-          </div>
-        </div>
-
         {/* MAIN FOOTER COLS */}
         <div className="footer-main-grid">
           {/* BRAND COL */}
@@ -81,9 +58,8 @@ export default function Footer({ onOpenTrialModal }) {
               <li><a href="#hero">Início</a></li>
               <li><a href="#instagram-feed">Feed & Reels</a></li>
               <li><a href="#modalidades">Modalidades de Treino</a></li>
-              <li><a href="#calculadora">Calculadora Fitness</a></li>
               <li><a href="#planos">Planos & Preços</a></li>
-              <li><a href="#avaliacoes">Avaliações 5 Estrelas</a></li>
+              <li><a href="#avaliacoes">Avaliações</a></li>
               <li><a href="#localizacao">Localização & Horários</a></li>
               <li><a href="#faq">Perguntas Frequentes</a></li>
             </ul>

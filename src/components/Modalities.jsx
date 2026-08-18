@@ -121,19 +121,35 @@ export default function Modalities({ onOpenTrialModal }) {
           })}
         </div>
 
-        {/* BOTTOM CTA CALLOUT BANNER */}
-        <div className="modalities-cta-banner glass-card neon-border-glow">
-          <div className="banner-text">
-            <h4>Ainda não sabe qual modalidade escolher?</h4>
-            <p>Faça uma aula experimental gratuita e conheça todas as opções na prática.</p>
+        {/* BOTTOM CTA CALLOUT BANNER (STITCH BENTO DESIGN) */}
+        <div className="stat-card stitch-cta-banner modalities-stitch-cta-banner">
+          <div className="bg-pulse"></div>
+          <div className="stitch-cta-ambient-glow"></div>
+          
+          <div className="stitch-cta-inner-wrap">
+            <div className="stitch-cta-left-content">
+              <div className="stitch-cta-icon-box">
+                <Sparkles size={26} className="text-accent-red" />
+              </div>
+              <div className="stitch-cta-text-box">
+                <div className="stitch-cta-header-line">
+                  <h4 className="stitch-cta-title">Ainda não sabe qual modalidade escolher?</h4>
+                  <span className="convenio-mini-pill red-pill">100% Grátis</span>
+                </div>
+                <p className="stitch-cta-desc">
+                  Venha fazer uma aula experimental sem compromisso, converse com nossos instrutores e sinta a energia do salão de musculação e dança na prática.
+                </p>
+              </div>
+            </div>
+            
+            <button 
+              className="btn-primary stitch-cta-action-btn"
+              onClick={onOpenTrialModal}
+            >
+              <span>Garantir Aula Experimental</span>
+              <ArrowRight size={18} />
+            </button>
           </div>
-          <button 
-            className="btn-primary"
-            onClick={onOpenTrialModal}
-          >
-            <span>Garantir Aula Experimental</span>
-            <ArrowRight size={18} />
-          </button>
         </div>
       </div>
     </section>

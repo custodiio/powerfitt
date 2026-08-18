@@ -2,7 +2,7 @@
  * WhatsApp Helper Utility
  * Formats message and opens WhatsApp Web or App
  */
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "5564999999999";
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "5564992527707";
 
 export function getWhatsAppLink(message) {
   const encodedMsg = encodeURIComponent(message);
