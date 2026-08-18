@@ -65,9 +65,11 @@ export function ScrollReveal({
 }) {
   const [ref, isVisible] = useScrollReveal({ threshold, triggerOnce: true });
 
+  const dist = typeof distance === "number" ? `${distance / 16}rem` : distance;
+
   const baseStyle = {
     opacity: isVisible ? 1 : 0,
-    transform: isVisible ? "translateY(0)" : `translateY(${distance}px)`,
+    transform: isVisible ? "translateY(0)" : `translateY(${dist})`,
     transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
     willChange: "opacity, transform",
     ...externalStyle,

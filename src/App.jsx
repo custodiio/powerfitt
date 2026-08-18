@@ -19,7 +19,7 @@ const Faq = lazy(() => import("./components/Faq"));
 const Footer = lazy(() => import("./components/Footer"));
 
 /* Minimal loading fallback - invisible placeholder to avoid layout shifts */
-const SectionFallback = () => <div style={{ minHeight: "200px" }} />;
+const SectionFallback = () => <div style={{ minHeight: "12.5rem" }} />;
 
 export default function App() {
   const [trialModalOpen, setTrialModalOpen] = useState(false);
