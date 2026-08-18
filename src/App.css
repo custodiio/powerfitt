@@ -73,19 +73,19 @@
 }
 
 .navbar-brand-name {
-  font-family: var(--font-hero);
-  font-size: 1.35rem;
+  font-family: var(--font-impact);
+  font-size: 1.55rem;
   letter-spacing: 0.04em;
   line-height: 1;
   color: #fff;
 }
 
-/* SUBTLE STATUS BADGE UNDER LOGO (TYPO ROUND FONT) */
+/* SUBTLE STATUS BADGE UNDER LOGO */
 .navbar-subtle-status {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 3px;
+  margin-top: 1px;
 }
 
 .status-mini-dot {
@@ -106,10 +106,12 @@
 }
 
 .status-mini-text {
-  font-family: var(--font-typo);
-  font-size: 0.72rem;
+  font-family: var(--font-support);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
@@ -119,11 +121,13 @@
   gap: 28px;
 }
 
-/* NAV LINKS IN TYPO ROUND FONT */
+/* NAV LINKS IN BARLOW CONDENSED / TEKO */
 .nav-link {
-  font-family: var(--font-typo);
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
+  font-family: var(--font-support);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-secondary);
   transition: color 0.2s ease;
   position: relative;
@@ -159,10 +163,12 @@
 }
 
 .btn-nav-cta {
-  font-family: var(--font-typo);
+  font-family: var(--font-cta);
   padding: 10px 22px;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
 }
 
 .mobile-toggle-btn {
@@ -194,8 +200,11 @@
 }
 
 .mobile-link {
-  font-family: var(--font-typo);
-  font-size: 1.05rem;
+  font-family: var(--font-support);
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--text-secondary);
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -225,7 +234,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.38) contrast(1.18);
+  filter: brightness(0.36) contrast(1.2);
 }
 
 .hero-gradient-overlay {
@@ -241,7 +250,7 @@
   transform: translateX(-50%);
   width: 850px;
   height: 500px;
-  background: radial-gradient(circle, rgba(229, 9, 20, 0.2) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.22) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -249,6 +258,7 @@
   max-width: 940px;
   margin: 0 auto;
   text-align: center;
+  position: relative;
 }
 
 .hero-top-badge {
@@ -258,9 +268,11 @@
   background: rgba(229, 9, 20, 0.12);
   border: 1px solid rgba(229, 9, 20, 0.4);
   color: #fff;
-  font-family: var(--font-typo);
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  font-family: var(--font-support);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   padding: 8px 18px;
   border-radius: var(--radius-full);
   margin-bottom: 24px;
@@ -276,11 +288,11 @@
   animation: pulse-dot 2s infinite;
 }
 
-/* BIG HEADLINE USES BEBAS NEUE / SYNE (FONTE DE DESTAQUE ANTERIOR) */
+/* BIG HEADLINE (BEBAS NEUE BOLD + RED NEON GLOW + SPEED SLANT) */
 .hero-headline {
-  font-family: var(--font-hero);
+  font-family: var(--font-impact);
   font-size: clamp(3.2rem, 7.8vw, 6.2rem);
-  font-weight: 900;
+  font-weight: 700;
   line-height: 0.95;
   letter-spacing: 0.02em;
   color: #ffffff;
@@ -294,11 +306,14 @@
 }
 
 .hero-lead-text {
-  font-size: clamp(1rem, 1.8vw, 1.18rem);
+  font-family: var(--font-reading);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: 400;
   color: var(--text-secondary);
-  max-width: 740px;
+  max-width: 720px;
   margin: 0 auto 36px;
-  line-height: 1.6;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
 }
 
 .hero-cta-group {
@@ -311,15 +326,19 @@
 }
 
 .hero-btn-cta {
-  font-family: var(--font-typo);
-  font-size: 0.98rem;
-  padding: 14px 32px;
+  font-family: var(--font-cta);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  padding: 14px 34px;
 }
 
 .hero-btn-plans {
-  font-family: var(--font-typo);
-  font-size: 0.95rem;
-  padding: 14px 28px;
+  font-family: var(--font-cta);
+  font-size: 1.22rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  padding: 14px 30px;
 }
 
 .hero-proofs-strip {
@@ -329,8 +348,11 @@
   gap: 24px;
   flex-wrap: wrap;
   color: var(--text-secondary);
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .proof-item {
@@ -374,8 +396,9 @@
 }
 
 .stat-index-num {
-  font-family: var(--font-typo);
-  font-size: 0.82rem;
+  font-family: var(--font-support);
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--accent-red);
   letter-spacing: 0.08em;
 }
@@ -387,27 +410,30 @@
 }
 
 .stat-giant-num {
-  font-family: var(--font-hero);
-  font-size: 2.8rem;
-  font-weight: 900;
+  font-family: var(--font-impact);
+  font-size: 3rem;
+  font-weight: 700;
   line-height: 1;
   color: #fff;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   letter-spacing: 0.02em;
 }
 
 .stat-primary-label {
-  font-family: var(--font-typo);
-  font-size: 1.05rem;
+  font-family: var(--font-support);
+  font-size: 1.15rem;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: #fff;
   margin-bottom: 4px;
 }
 
 .stat-sub-desc {
-  font-size: 0.78rem;
+  font-family: var(--font-reading);
+  font-size: 0.8rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* SECTION COMMONS */
@@ -418,16 +444,19 @@
 }
 
 .section-title {
-  font-family: var(--font-hero);
-  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
-  font-weight: 900;
+  font-family: var(--font-impact);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 700;
   margin-bottom: 14px;
   letter-spacing: 0.02em;
   line-height: 1;
+  text-transform: uppercase;
 }
 
 .section-subtitle {
+  font-family: var(--font-reading);
   font-size: 1.05rem;
+  font-weight: 400;
   color: var(--text-secondary);
   line-height: 1.6;
 }
@@ -480,8 +509,11 @@
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #fff;
-  font-family: var(--font-typo);
-  font-size: 0.85rem;
+  font-family: var(--font-support);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   padding: 8px 14px;
   border-radius: var(--radius-full);
   display: inline-flex;
@@ -506,8 +538,9 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-family: var(--font-typo);
-  font-size: 0.85rem;
+  font-family: var(--font-support);
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--accent-red);
   letter-spacing: 0.08em;
   background: rgba(0, 0, 0, 0.6);
@@ -517,15 +550,17 @@
 }
 
 .carousel-slide-title {
-  font-family: var(--font-hero);
-  font-size: 2.2rem;
+  font-family: var(--font-impact);
+  font-size: 2.4rem;
   color: #fff;
   letter-spacing: 0.02em;
   line-height: 1.1;
   margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .carousel-slide-desc {
+  font-family: var(--font-reading);
   font-size: 0.95rem;
   color: var(--text-secondary);
   max-width: 680px;
@@ -602,9 +637,10 @@
 
 .convenio-card-badge {
   display: inline-block;
-  font-family: var(--font-typo);
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
+  font-family: var(--font-support);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: var(--radius-full);
@@ -632,24 +668,28 @@
 }
 
 .convenio-brand-title {
-  font-family: var(--font-hero);
-  font-size: 2.2rem;
+  font-family: var(--font-impact);
+  font-size: 2.4rem;
   letter-spacing: 0.02em;
   line-height: 1;
+  text-transform: uppercase;
 }
 
 .wellhub-card .convenio-brand-title { color: #FF3366; }
 .totalpass-card .convenio-brand-title { color: #00E676; }
 
 .convenio-status-chip {
-  font-family: var(--font-typo);
-  font-size: 0.82rem;
+  font-family: var(--font-support);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--text-muted);
 }
 
 .convenio-quote {
+  font-family: var(--font-reading);
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff;
   font-style: italic;
   margin-bottom: 20px;
@@ -667,7 +707,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.9rem;
+  font-family: var(--font-reading);
+  font-size: 0.92rem;
   color: var(--text-secondary);
 }
 
@@ -691,8 +732,9 @@
 }
 
 .pillar-num {
-  font-family: var(--font-typo);
-  font-size: 0.9rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--accent-red);
 }
 
@@ -707,17 +749,19 @@
 }
 
 .pillar-title {
-  font-family: var(--font-typo);
-  font-size: 1.05rem;
+  font-family: var(--font-support);
+  font-size: 1.2rem;
   font-weight: 700;
+  text-transform: uppercase;
   margin-bottom: 6px;
   color: #fff;
 }
 
 .pillar-desc {
-  font-size: 0.82rem;
+  font-family: var(--font-reading);
+  font-size: 0.85rem;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .convenios-slogan-strip {
@@ -730,8 +774,9 @@
 }
 
 .slogan-pre {
-  font-family: var(--font-typo);
-  font-size: 0.85rem;
+  font-family: var(--font-support);
+  font-size: 0.9rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -740,10 +785,11 @@
 }
 
 .slogan-main {
-  font-family: var(--font-hero);
-  font-size: 2rem;
+  font-family: var(--font-impact);
+  font-size: 2.2rem;
   letter-spacing: 0.02em;
   color: #fff;
+  text-transform: uppercase;
 }
 
 /* 9:16 REELS SHOWCASE SECTION */
@@ -820,8 +866,9 @@
 }
 
 .insta-top-brand {
-  font-family: var(--font-typo);
-  font-size: 1.1rem;
+  font-family: var(--font-support);
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #fff;
   letter-spacing: -0.02em;
 }
@@ -883,8 +930,9 @@
 }
 
 .reels-handle {
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 700;
   color: #fff;
 }
 
@@ -896,8 +944,9 @@
 
 .reels-follow-btn {
   pointer-events: auto;
-  font-family: var(--font-typo);
-  font-size: 0.76rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 2px 8px;
@@ -905,6 +954,7 @@
 }
 
 .reels-caption-text {
+  font-family: var(--font-reading);
   font-size: 0.78rem;
   color: #E2E8F0;
   line-height: 1.35;
@@ -915,6 +965,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  font-family: var(--font-reading);
   font-size: 0.7rem;
   color: var(--text-muted);
 }
@@ -936,8 +987,9 @@
   align-items: center;
   gap: 2px;
   color: #fff;
-  font-family: var(--font-typo);
-  font-size: 0.72rem;
+  font-family: var(--font-support);
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .reels-context-col {
@@ -971,23 +1023,25 @@
 }
 
 .profile-handle {
-  font-family: var(--font-typo);
-  font-size: 1.25rem;
+  font-family: var(--font-support);
+  font-size: 1.45rem;
+  font-weight: 700;
   color: #fff;
 }
 
 .profile-bio-summary {
-  font-size: 0.85rem;
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.45;
+  line-height: 1.5;
   margin-bottom: 10px;
 }
 
 .profile-stats-row {
   display: flex;
   gap: 16px;
-  font-family: var(--font-typo);
-  font-size: 0.85rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
   color: var(--text-muted);
 }
 
@@ -1003,8 +1057,10 @@
 }
 
 .features-box-title {
-  font-family: var(--font-typo);
-  font-size: 0.95rem;
+  font-family: var(--font-support);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: #fff;
   margin-bottom: 10px;
 }
@@ -1014,7 +1070,8 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 0.85rem;
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
@@ -1046,8 +1103,9 @@
 }
 
 .modality-num-tag {
-  font-family: var(--font-typo);
-  font-size: 0.9rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 700;
   color: var(--accent-red);
 }
 
@@ -1062,8 +1120,9 @@
 }
 
 .modality-tag-pill {
-  font-family: var(--font-typo);
-  font-size: 0.78rem;
+  font-family: var(--font-support);
+  font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--accent-red);
   letter-spacing: 0.06em;
@@ -1071,18 +1130,20 @@
 }
 
 .modality-card-title {
-  font-family: var(--font-hero);
-  font-size: 1.6rem;
+  font-family: var(--font-impact);
+  font-size: 1.8rem;
   letter-spacing: 0.02em;
   color: #fff;
   margin-bottom: 10px;
   line-height: 1.1;
+  text-transform: uppercase;
 }
 
 .modality-card-desc {
-  font-size: 0.85rem;
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.55;
   margin-bottom: 18px;
   flex: 1;
 }
@@ -1100,7 +1161,8 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 0.8rem;
+  font-family: var(--font-reading);
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
@@ -1114,14 +1176,16 @@
 }
 
 .modalities-cta-banner h4 {
-  font-family: var(--font-hero);
-  font-size: 1.4rem;
+  font-family: var(--font-impact);
+  font-size: 1.6rem;
+  text-transform: uppercase;
   margin-bottom: 4px;
 }
 
 .modalities-cta-banner p {
+  font-family: var(--font-reading);
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 }
 
 /* OFFICIAL PLANS GRID */
@@ -1153,9 +1217,11 @@
   transform: translateX(-50%);
   background: var(--accent-red);
   color: #fff;
-  font-family: var(--font-typo);
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   padding: 5px 14px;
   border-radius: var(--radius-full);
   display: inline-flex;
@@ -1166,22 +1232,25 @@
 }
 
 .plan-badge-pill {
-  font-family: var(--font-typo);
-  font-size: 0.75rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
 }
 
 .plan-title {
-  font-family: var(--font-hero);
-  font-size: 1.8rem;
+  font-family: var(--font-impact);
+  font-size: 2rem;
   letter-spacing: 0.02em;
   color: #fff;
   margin: 4px 0 6px;
+  text-transform: uppercase;
 }
 
 .plan-slogan {
-  font-size: 0.82rem;
+  font-family: var(--font-reading);
+  font-size: 0.85rem;
   color: var(--text-secondary);
   font-style: italic;
   min-height: 38px;
@@ -1197,28 +1266,32 @@
 }
 
 .price-symbol {
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-family: var(--font-support);
+  font-size: 1.2rem;
+  font-weight: 700;
   color: var(--text-muted);
   margin-right: 2px;
 }
 
 .price-amount {
-  font-family: var(--font-hero);
-  font-size: 3.8rem;
+  font-family: var(--font-impact);
+  font-size: 4rem;
   line-height: 0.9;
   color: #fff;
 }
 
 .price-cents {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-family: var(--font-support);
+  font-size: 1.4rem;
+  font-weight: 700;
   color: #fff;
 }
 
 .price-period-label {
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--text-muted);
   display: block;
   margin-top: 4px;
@@ -1226,8 +1299,10 @@
 
 .price-installment-tag {
   display: inline-block;
-  font-family: var(--font-typo);
-  font-size: 0.78rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: #22C55E;
   background: rgba(34, 197, 94, 0.1);
   padding: 2px 8px;
@@ -1253,7 +1328,8 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 0.84rem;
+  font-family: var(--font-reading);
+  font-size: 0.86rem;
   color: var(--text-secondary);
 }
 
@@ -1285,13 +1361,15 @@
 }
 
 .reminder-text h4 {
-  font-family: var(--font-hero);
-  font-size: 1.25rem;
+  font-family: var(--font-impact);
+  font-size: 1.45rem;
+  text-transform: uppercase;
   margin-bottom: 2px;
 }
 
 .reminder-text p {
-  font-size: 0.85rem;
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
@@ -1314,8 +1392,9 @@
 }
 
 .google-logo-badge {
-  font-family: var(--font-typo);
-  font-size: 1.25rem;
+  font-family: var(--font-support);
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
 .g-blue { color: #4285F4; }
@@ -1331,8 +1410,8 @@
 }
 
 .score-num {
-  font-family: var(--font-hero);
-  font-size: 2.8rem;
+  font-family: var(--font-impact);
+  font-size: 3rem;
   color: #fff;
   line-height: 1;
 }
@@ -1343,8 +1422,8 @@
 }
 
 .score-count {
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
   color: var(--text-muted);
 }
 
@@ -1363,8 +1442,11 @@
   color: var(--text-secondary);
   padding: 8px 18px;
   border-radius: var(--radius-full);
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   transition: var(--transition-fast);
 }
 
@@ -1411,29 +1493,33 @@
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-red), #B30006);
   color: #fff;
-  font-family: var(--font-typo);
-  font-size: 1.1rem;
+  font-family: var(--font-support);
+  font-size: 1.15rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .reviewer-name {
-  font-family: var(--font-typo);
-  font-size: 0.95rem;
+  font-family: var(--font-support);
+  font-size: 1.05rem;
   font-weight: 700;
   color: #fff;
 }
 
 .reviewer-time {
+  font-family: var(--font-reading);
   font-size: 0.72rem;
   color: var(--text-muted);
   display: block;
 }
 
 .review-tag-badge {
-  font-family: var(--font-typo);
-  font-size: 0.75rem;
+  font-family: var(--font-support);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-subtle);
   padding: 3px 8px;
@@ -1452,13 +1538,15 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-family: var(--font-reading);
   font-size: 0.72rem;
   color: var(--text-muted);
   margin-left: 8px;
 }
 
 .review-quote-text {
-  font-size: 0.9rem;
+  font-family: var(--font-reading);
+  font-size: 0.92rem;
   color: var(--text-secondary);
   line-height: 1.6;
   font-style: italic;
@@ -1472,6 +1560,7 @@
 }
 
 .google-source-tag {
+  font-family: var(--font-reading);
   font-size: 0.72rem;
   color: var(--text-muted);
   font-weight: 600;
@@ -1498,8 +1587,10 @@
 }
 
 .live-detail-text {
-  font-family: var(--font-typo);
-  font-size: 0.85rem;
+  font-family: var(--font-support);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--text-muted);
 }
 
@@ -1522,23 +1613,27 @@
 }
 
 .address-text-content h4 {
-  font-family: var(--font-hero);
-  font-size: 1.3rem;
+  font-family: var(--font-impact);
+  font-size: 1.4rem;
+  text-transform: uppercase;
   margin-bottom: 4px;
 }
 
 .address-line {
+  font-family: var(--font-reading);
   font-size: 0.95rem;
   color: #fff;
   font-weight: 600;
 }
 
 .address-neighborhood {
+  font-family: var(--font-reading);
   font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
 .address-cep {
+  font-family: var(--font-reading);
   font-size: 0.75rem;
   color: var(--text-muted);
 }
@@ -1551,8 +1646,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-typo);
-  font-size: 0.92rem;
+  font-family: var(--font-support);
+  font-size: 0.98rem;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 12px;
@@ -1570,7 +1665,8 @@
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.02);
-  font-size: 0.85rem;
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
 }
 
 .schedule-weekend {
@@ -1598,8 +1694,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-typo);
-  font-size: 0.82rem;
+  font-family: var(--font-support);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--text-secondary);
   background: rgba(255, 255, 255, 0.04);
   padding: 6px 12px;
@@ -1656,12 +1754,14 @@
 
 .pin-info strong {
   display: block;
-  font-family: var(--font-typo);
-  font-size: 0.95rem;
+  font-family: var(--font-support);
+  font-size: 1.05rem;
+  font-weight: 700;
   color: #fff;
 }
 
 .pin-info span {
+  font-family: var(--font-reading);
   font-size: 0.75rem;
   color: var(--text-muted);
 }
@@ -1694,9 +1794,10 @@
 }
 
 .faq-question-text {
-  font-family: var(--font-typo);
-  font-size: 1.05rem;
+  font-family: var(--font-support);
+  font-size: 1.25rem;
   font-weight: 700;
+  text-transform: uppercase;
   color: #fff;
 }
 
@@ -1723,6 +1824,7 @@
   padding-top: 14px;
   margin-top: 14px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-reading);
   color: var(--text-secondary);
   font-size: 0.95rem;
   line-height: 1.6;
@@ -1746,13 +1848,15 @@
 }
 
 .faq-contact-text h4 {
-  font-family: var(--font-hero);
-  font-size: 1.3rem;
+  font-family: var(--font-impact);
+  font-size: 1.45rem;
+  text-transform: uppercase;
   margin-bottom: 2px;
 }
 
 .faq-contact-text p {
-  font-size: 0.85rem;
+  font-family: var(--font-reading);
+  font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
@@ -1775,14 +1879,16 @@
 }
 
 .footer-cta-title {
-  font-family: var(--font-hero);
-  font-size: 2.2rem;
+  font-family: var(--font-impact);
+  font-size: 2.4rem;
   letter-spacing: 0.02em;
   line-height: 1.1;
+  text-transform: uppercase;
   margin-bottom: 6px;
 }
 
 .footer-cta-sub {
+  font-family: var(--font-reading);
   font-size: 0.95rem;
   color: var(--text-secondary);
 }
@@ -1801,6 +1907,7 @@
 }
 
 .footer-brand-bio {
+  font-family: var(--font-reading);
   font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -1833,9 +1940,10 @@
 }
 
 .footer-col-title {
-  font-family: var(--font-typo);
-  font-size: 1.05rem;
+  font-family: var(--font-support);
+  font-size: 1.2rem;
   font-weight: 700;
+  text-transform: uppercase;
   margin-bottom: 18px;
   color: #fff;
   letter-spacing: 0.02em;
@@ -1849,8 +1957,10 @@
 }
 
 .footer-nav-list a {
-  font-family: var(--font-typo);
-  font-size: 0.92rem;
+  font-family: var(--font-support);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
   color: var(--text-secondary);
   transition: color 0.2s ease;
 }
@@ -1868,6 +1978,7 @@
 .schedule-entry {
   display: flex;
   justify-content: space-between;
+  font-family: var(--font-reading);
   font-size: 0.82rem;
 }
 
@@ -1880,8 +1991,10 @@
 }
 
 .sched-note {
-  font-family: var(--font-typo);
-  font-size: 0.78rem;
+  font-family: var(--font-support);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: #22C55E;
   margin-top: 6px;
 }
@@ -1897,6 +2010,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  font-family: var(--font-reading);
   font-size: 0.85rem;
   color: var(--text-secondary);
 }
@@ -1906,8 +2020,10 @@
 }
 
 .convenios-mini-label {
-  font-family: var(--font-typo);
-  font-size: 0.75rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--text-muted);
   display: block;
   margin-bottom: 6px;
@@ -1922,8 +2038,10 @@
   background: rgba(255, 51, 102, 0.15);
   border: 1px solid rgba(255, 51, 102, 0.4);
   color: #FF3366;
-  font-family: var(--font-typo);
-  font-size: 0.75rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
 }
@@ -1932,8 +2050,10 @@
   background: rgba(0, 230, 118, 0.15);
   border: 1px solid rgba(0, 230, 118, 0.4);
   color: #00E676;
-  font-family: var(--font-typo);
-  font-size: 0.75rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
 }
@@ -1949,6 +2069,7 @@
 }
 
 .copyright-text {
+  font-family: var(--font-reading);
   font-size: 0.82rem;
   color: var(--text-muted);
 }
@@ -1957,8 +2078,10 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--text-secondary);
 }
 
@@ -1999,8 +2122,10 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-typo);
-  font-size: 0.82rem;
+  font-family: var(--font-support);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: #25D366;
   margin-bottom: 4px;
 }
@@ -2013,6 +2138,7 @@
 }
 
 .whatsapp-floating-tooltip p {
+  font-family: var(--font-reading);
   font-size: 0.82rem;
   color: var(--text-secondary);
   line-height: 1.35;
@@ -2027,8 +2153,9 @@
   border-radius: 50%;
   background: #EF4444;
   color: #fff;
-  font-family: var(--font-typo);
-  font-size: 0.75rem;
+  font-family: var(--font-support);
+  font-size: 0.82rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2076,23 +2203,27 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-typo);
-  font-size: 0.82rem;
+  font-family: var(--font-support);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
   color: var(--accent-red);
   letter-spacing: 0.06em;
   margin-bottom: 10px;
 }
 
 .modal-title {
-  font-family: var(--font-hero);
-  font-size: 2.2rem;
+  font-family: var(--font-impact);
+  font-size: 2.4rem;
   letter-spacing: 0.02em;
   line-height: 1;
+  text-transform: uppercase;
   margin-bottom: 6px;
 }
 
 .modal-subtitle {
-  font-size: 0.88rem;
+  font-family: var(--font-reading);
+  font-size: 0.9rem;
   color: var(--text-secondary);
   margin-bottom: 20px;
 }
@@ -2110,8 +2241,11 @@
 }
 
 .form-label {
-  font-family: var(--font-typo);
-  font-size: 0.88rem;
+  font-family: var(--font-support);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--text-secondary);
 }
 
@@ -2119,6 +2253,7 @@
   background: rgba(11, 14, 22, 0.9);
   border: 1px solid var(--border-card);
   color: #fff;
+  font-family: var(--font-reading);
   padding: 12px 16px;
   border-radius: var(--radius-md);
   font-size: 0.95rem;
@@ -2146,15 +2281,16 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-typo);
+  font-family: var(--font-reading);
   font-size: 0.82rem;
   color: var(--text-secondary);
 }
 
 .btn-submit-modal {
-  font-family: var(--font-typo);
+  font-family: var(--font-cta);
   padding: 14px;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.07em;
 }
 
 .modal-success-state {
@@ -2174,12 +2310,14 @@
 }
 
 .modal-success-state h3 {
-  font-family: var(--font-hero);
-  font-size: 1.6rem;
+  font-family: var(--font-impact);
+  font-size: 1.8rem;
+  text-transform: uppercase;
   margin-bottom: 8px;
 }
 
 .modal-success-state p {
+  font-family: var(--font-reading);
   color: var(--text-secondary);
   font-size: 0.9rem;
 }
@@ -2234,13 +2372,15 @@
 }
 
 .lightbox-footer h3 {
-  font-family: var(--font-hero);
-  font-size: 1.8rem;
+  font-family: var(--font-impact);
+  font-size: 2rem;
   letter-spacing: 0.02em;
+  text-transform: uppercase;
   margin: 8px 0 4px;
 }
 
 .lightbox-footer p {
+  font-family: var(--font-reading);
   color: var(--text-secondary);
   font-size: 0.95rem;
 }
@@ -2317,7 +2457,7 @@
     height: 380px;
   }
   .carousel-slide-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
   .phone-device-frame {
     width: 310px;
