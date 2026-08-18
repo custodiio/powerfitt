@@ -90,6 +90,51 @@ export default function Reviews() {
     setCurrentIndex(idx);
   };
 
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 40;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      handleNext();
+    } else if (distance < -minSwipeDistance) {
+      handlePrev();
+    }
+  };
+
+  const [dimensions, setDimensions] = useState({
+    cardWidth: 260,
+    gap: 16
+  });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        const mobileW = Math.max(210, Math.min(width * 0.72, 260));
+        setDimensions({ cardWidth: mobileW, gap: 12 });
+      } else if (width <= 768) {
+        setDimensions({ cardWidth: 250, gap: 14 });
+      } else {
+        setDimensions({ cardWidth: 260, gap: 16 });
+      }
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
   // Direct Google Maps Reviews URL provided by user
   const mapsUrl = "https://www.google.com/maps/place/PowerFitt/@-17.7587224,-50.9158331,17z/data=!4m8!3m7!1s0x9361c5c54e01c923:0xa9dc7ad527d0c9a3!8m2!3d-17.7574803!4d-50.9171156!9m1!1b1!16s%2Fg%2F11sjyj48jg?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D";
 
@@ -106,7 +151,7 @@ export default function Reviews() {
           {/* LEFT COLUMN: TITLE (MATCHING STANDARD SECTION TITLE), RATING & CTA BUTTON */}
           <div className="reviews-info-column">
             <div className="section-badge red-badge">
-              <Sparkles size={15} />
+              <Sparkles size={14} />
               <span>AVALIAÇÕES REAIS • GOOGLE MAPS</span>
             </div>
 
@@ -121,7 +166,7 @@ export default function Reviews() {
               <div className="rating-stars-col">
                 <div className="stars-cluster">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={20} className="fill-[#F59E0B] text-[#F59E0B]" />
+                    <Star key={i} size={18} className="fill-[#F59E0B] text-[#F59E0B]" />
                   ))}
                 </div>
                 <span className="rating-excellence-tag">
@@ -134,8 +179,8 @@ export default function Reviews() {
               Estrutura moderna, ambiente 100% climatizado, aparelhos novos e acompanhamento profissional de verdade no Parque Dom Miguel.
             </p>
 
-            {/* CTA BUTTON LOCATED IN THE LEFT COLUMN WITH DIRECT GOOGLE MAPS LINK */}
-            <div className="reviews-left-cta-wrap">
+            {/* CTA BUTTON LOCATED IN THE LEFT COLUMN (DESKTOP ONLY) */}
+            <div className="reviews-left-cta-wrap desktop-only">
               <a 
                 href={mapsUrl} 
                 target="_blank" 
@@ -150,12 +195,17 @@ export default function Reviews() {
           </div>
 
           {/* RIGHT COLUMN: COMPACT LATERAL CAROUSEL + CLEAN CENTERED CONTROLS */}
-          <div className="reviews-carousel-column">
+          <div 
+            className="reviews-carousel-column"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
             <div className="reviews-carousel-stage">
               <div 
                 className="reviews-carousel-track"
                 style={{
-                  transform: `translateX(calc(50% - ${(currentIndex * 276) + 138}px))`
+                  transform: `translateX(calc(50% - ${(currentIndex * (dimensions.cardWidth + dimensions.gap)) + (dimensions.cardWidth / 2)}px))`
                 }}
               >
                 {reviews.map((item, idx) => {
@@ -164,6 +214,10 @@ export default function Reviews() {
                     <div
                       key={item.id}
                       onClick={() => handleSelectCard(idx)}
+                      style={{
+                        width: `${dimensions.cardWidth}px`,
+                        flex: `0 0 ${dimensions.cardWidth}px`
+                      }}
                       className={`review-bento-card stat-card ${isActive ? "card-in-focus" : "card-out-of-focus"}`}
                     >
                       {/* RADIAL PULSE HOVER */}
@@ -248,6 +302,20 @@ export default function Reviews() {
               >
                 <ChevronRight size={20} />
               </button>
+            </div>
+
+            {/* MOBILE ONLY: CTA BUTTON BELOW CAROUSEL */}
+            <div className="reviews-mobile-cta-wrap mobile-only">
+              <a 
+                href={mapsUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-secondary-outline reviews-view-all-btn group w-full"
+              >
+                <MapPin size={18} className="text-accent-red flex-shrink-0" />
+                <span>Ver Todas as Avaliações</span>
+                <ExternalLink size={16} className="btn-arrow-icon" />
+              </a>
             </div>
           </div>
         </div>

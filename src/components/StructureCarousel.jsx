@@ -84,6 +84,51 @@ export default function StructureCarousel() {
     setCurrentIndex(idx);
   };
 
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 40;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      handleNext();
+    } else if (distance < -minSwipeDistance) {
+      handlePrev();
+    }
+  };
+
+  const [dimensions, setDimensions] = useState({
+    cardWidth: 410,
+    gap: 20
+  });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        const mobileW = Math.max(190, Math.min(width * 0.62, 230));
+        setDimensions({ cardWidth: mobileW, gap: 12 });
+      } else if (width <= 768) {
+        setDimensions({ cardWidth: 320, gap: 16 });
+      } else {
+        setDimensions({ cardWidth: 410, gap: 20 });
+      }
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
   return (
     <section id="estrutura" className="section-padding structure-carousel-section relative">
       {/* ATMOSPHERIC BACKGROUND GLOW */}
@@ -95,7 +140,7 @@ export default function StructureCarousel() {
         {/* SECTION HEADER — STANDARD TITLE & SUBTITLE IDENTICAL TO OTHER SECTIONS */}
         <div className="section-header-center">
           <div className="section-badge red-badge">
-            <Sparkles size={16} />
+            <Sparkles size={14} />
             <span>ESTRUTURA & ESPAÇO FÍSICO</span>
           </div>
           <h2 className="section-title">
@@ -107,12 +152,17 @@ export default function StructureCarousel() {
         </div>
 
         {/* 4:3 LATERAL CAROUSEL STAGE WITH FOCUS / BLUR TRANSITIONS */}
-        <div className="structure-lateral-carousel-wrapper">
+        <div 
+          className="structure-lateral-carousel-wrapper"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           <div className="structure-carousel-stage">
             <div 
               className="structure-carousel-track"
               style={{
-                transform: `translateX(calc(50% - ${(currentIndex * 430) + 205}px))`
+                transform: `translateX(calc(50% - ${(currentIndex * (dimensions.cardWidth + dimensions.gap)) + (dimensions.cardWidth / 2)}px))`
               }}
             >
               {slides.map((slide, idx) => {
@@ -126,6 +176,10 @@ export default function StructureCarousel() {
                       } else {
                         handleSelectSlide(idx);
                       }
+                    }}
+                    style={{
+                      width: `${dimensions.cardWidth}px`,
+                      flex: `0 0 ${dimensions.cardWidth}px`
                     }}
                     className={`structure-bento-card ${isActive ? "card-in-focus" : "card-out-of-focus"}`}
                   >

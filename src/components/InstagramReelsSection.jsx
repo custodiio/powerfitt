@@ -1,10 +1,54 @@
-import React, { useState } from "react";
-import { ExternalLink, Heart, MessageCircle, Users, Film, Dumbbell, Tag, Sparkles, Award } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ExternalLink, Heart, MessageCircle, Users, Film, Dumbbell, Tag, Sparkles, Award, ChevronLeft, ChevronRight } from "lucide-react";
 import InstagramIcon from "./InstagramIcon";
 import { getInstagramStats } from "../utils/instagramStats";
 
 export default function InstagramReelsSection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 40;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      setMobileIndex((prev) => (prev + 1) % posts.length);
+    } else if (distance < -minSwipeDistance) {
+      setMobileIndex((prev) => (prev === 0 ? posts.length - 1 : prev - 1));
+    }
+  };
+
+  const [dimensions, setDimensions] = useState({
+    cardWidth: 220,
+    gap: 12
+  });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      const width = window.innerWidth;
+      if (width <= 480) {
+        const mobileW = Math.max(190, Math.min(width * 0.62, 230));
+        setDimensions({ cardWidth: mobileW, gap: 12 });
+      } else {
+        setDimensions({ cardWidth: 240, gap: 16 });
+      }
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
   const stats = getInstagramStats();
 
   const handleMouseMove = (e) => {
@@ -172,8 +216,8 @@ export default function InstagramReelsSection() {
               </div>
             </div>
 
-            {/* FOLLOW PROFILE CTA BUTTON */}
-            <div className="insta-cta-wrap">
+            {/* FOLLOW PROFILE CTA BUTTON (DESKTOP ONLY) */}
+            <div className="insta-cta-wrap desktop-only">
               <a 
                 href={instagramProfileUrl} 
                 target="_blank" 
@@ -188,7 +232,7 @@ export default function InstagramReelsSection() {
           </div>
 
           {/* RIGHT COLUMN: 3D PERSPECTIVE GRID (2, 2, 2 ASSYMETRIC BENTO) & MULTI-LAYER 3D ICONS */}
-          <div className="insta-3d-grid-wrapper">
+          <div className="insta-3d-grid-wrapper desktop-only">
             {/* ============================================================ */}
             {/* LAYER 1: 3D ICONS BEHIND THE GRID (Peeking from behind cards) */}
             {/* ============================================================ */}
@@ -466,6 +510,141 @@ export default function InstagramReelsSection() {
                 loading="lazy"
                 decoding="async"
               />
+            </div>
+          </div>
+
+          {/* MOBILE ONLY: LATERAL REELS CAROUSEL WITH 3 3D DEPTH ICONS */}
+          <div 
+            className="insta-mobile-carousel-wrapper mobile-only"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
+            {/* LATERAL STAGE & TRACK */}
+            <div className="structure-carousel-stage relative">
+              {/* 3 ANIMATED 3D ICONS ANCHORED TO ACTIVE CARD */}
+              {/* 1. Canto Superior Esquerdo: ATRÁS do card */}
+              <div className="insta-mobile-3d-card-corner top-left-behind pointer-events-none">
+                <img src="/images/insta_3d/coracao.png" alt="3D Coração" />
+              </div>
+
+              {/* 2. Canto Superior Direito: NA FRENTE, 100% NÍTIDO, COM GLOW E DESTAQUE */}
+              <div className="insta-mobile-3d-card-corner top-right-front pointer-events-none">
+                <img src="/images/insta_3d/curtida_1k.png" alt="3D Curtida 1K" />
+              </div>
+
+              {/* 3. Canto Inferior Esquerdo: NA FRENTE, NO CANTO DO CARD, TOTALMENTE ACIMA DO PASSADOR */}
+              <div className="insta-mobile-3d-card-corner bottom-left-front pointer-events-none">
+                <img src="/images/insta_3d/notificacao.png" alt="3D Notificação" />
+              </div>
+
+              <div 
+                className="structure-carousel-track"
+                style={{
+                  transform: `translateX(calc(50% - ${(mobileIndex * (dimensions.cardWidth + dimensions.gap)) + (dimensions.cardWidth / 2)}px))`
+                }}
+              >
+                {posts.map((post, pIdx) => {
+                  const isActive = pIdx === mobileIndex;
+                  return (
+                    <a
+                      key={post.id}
+                      href={instagramProfileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        if (!isActive) {
+                          e.preventDefault();
+                          setMobileIndex(pIdx);
+                        }
+                      }}
+                      style={{
+                        width: `${dimensions.cardWidth}px`,
+                        flex: `0 0 ${dimensions.cardWidth}px`
+                      }}
+                      className={`structure-bento-card insta-bento-carousel-card ${isActive ? "card-in-focus" : "card-out-of-focus"}`}
+                    >
+                      <div className="structure-card-img-wrap">
+                        <img 
+                          src={post.image} 
+                          alt={post.caption} 
+                          className="structure-card-img"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="structure-card-gradient-overlay"></div>
+                        
+                        {/* REELS BADGE TOP RIGHT */}
+                        <div className="structure-modal-badge" style={{ right: "0.5rem", left: "auto" }}>
+                          <Film size={11} className="text-white fill-white" />
+                          <span>REELS</span>
+                        </div>
+
+                        {/* BOTTOM CAPTION & ENGAGEMENT */}
+                        <div className="structure-card-caption-bento">
+                          <h4 className="structure-caption-title" style={{ fontSize: "0.85rem", lineHeight: "1.2" }}>
+                            {post.caption}
+                          </h4>
+                          <div className="flex items-center gap-3 mt-1.5 text-xs text-white/90">
+                            <div className="flex items-center gap-1">
+                              <Heart size={12} className="text-accent-red fill-accent-red" />
+                              <span className="font-semibold text-[0.7rem]">{post.likes}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <MessageCircle size={12} className="text-white" />
+                              <span className="font-semibold text-[0.7rem]">{post.comments}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* CAROUSEL CONTROLS */}
+            <div className="reviews-carousel-bottom-nav">
+              <button 
+                onClick={() => setMobileIndex((prev) => (prev === 0 ? posts.length - 1 : prev - 1))}
+                className="carousel-nav-btn"
+                aria-label="Reels anterior"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              <div className="reviews-dots-indicator">
+                {posts.map((_, dIdx) => (
+                  <button
+                    key={dIdx}
+                    onClick={() => setMobileIndex(dIdx)}
+                    className={`review-dot-btn ${dIdx === mobileIndex ? "active" : ""}`}
+                    aria-label={`Ir para Reels ${dIdx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button 
+                onClick={() => setMobileIndex((prev) => (prev + 1) % posts.length)}
+                className="carousel-nav-btn"
+                aria-label="Próximo Reels"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+
+            {/* FOLLOW CTA BUTTON BELOW CAROUSEL (MOBILE ONLY) */}
+            <div className="insta-mobile-cta-wrap mobile-only mt-6">
+              <a 
+                href={instagramProfileUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn-primary insta-follow-cta-btn w-full"
+              >
+                <InstagramIcon size={20} />
+                <span>SEGUE A GENTE LÁ!</span>
+                <ExternalLink size={18} />
+              </a>
             </div>
           </div>
         </div>

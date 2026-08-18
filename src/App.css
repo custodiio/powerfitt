@@ -676,17 +676,19 @@
 }
 
 .structure-carousel-track {
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: stretch;
-  gap: 1.25rem;
+  gap: var(--structure-card-gap, 1.25rem);
   transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
 /* 4:3 RATIO CARD */
 .structure-bento-card {
-  flex: 0 0 25.625rem;
-  width: 25.625rem;
+  flex: 0 0 var(--structure-card-width, 25.625rem);
+  width: var(--structure-card-width, 25.625rem);
   border-radius: var(--radius-xl);
   cursor: pointer;
   position: relative;
@@ -699,7 +701,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: var(--radius-xl);
+  border-radius: inherit;
   overflow: hidden;
   background: #000000;
 }
@@ -2598,14 +2600,14 @@
 .reviews-carousel-track {
   display: flex;
   align-items: stretch;
-  gap: 1rem;
+  gap: var(--review-card-gap, 1rem);
   transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: transform;
 }
 
 .review-bento-card {
-  flex: 0 0 16.25rem;
-  width: 16.25rem;
+  flex: 0 0 var(--review-card-width, 16.25rem);
+  width: var(--review-card-width, 16.25rem);
   min-height: 18.75rem;
   display: flex;
   flex-direction: column;
@@ -4215,66 +4217,749 @@
     display: none !important;
   }
   .mobile-only {
-    display: flex !important;
+    display: block !important;
   }
+  /* NAVBAR MOBILE HEADER */
+  .navbar-header {
+    padding: 0.625rem 0;
+  }
+  .navbar-brand-name {
+    font-size: 1.65rem;
+  }
+  .navbar-brand-logo-img {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  /* HERO SECTION FULL VIEWPORT ON MOBILE - BALANCED BREATHING ROOM */
   .hero-editorial-section {
-    padding: 6.25rem 0 2.5rem;
-    justify-content: flex-start;
+    min-height: 100vh;
+    height: 100vh;
+    padding: 3.75rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
   }
-  .hero-editorial-stats-grid {
-    grid-template-columns: 1fr;
-    margin-top: 2.25rem;
+
+  .hero-main-content {
     transform: none;
-  }
-  .hero-headline {
-    font-size: 2.5rem;
-  }
-  .convenios-four-pillars-grid {
-    grid-template-columns: 1fr;
-  }
-  .modalities-cards-grid {
-    grid-template-columns: 1fr;
-  }
-  .official-plans-grid,
-  .stitch-pricing-grid {
-    grid-template-columns: 1fr;
-  }
-  .structure-bento-card {
-    flex: 0 0 19.375rem;
-    width: 19.375rem;
-  }
-  .structure-caption-title {
-    font-size: 1.45rem;
-  }
-  .reviews-split-layout {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-  }
-  .review-bento-card {
-    flex: 0 0 18.125rem;
-    width: 18.125rem;
-    min-height: 22.5rem;
-  }
-  .footer-main-grid {
-    grid-template-columns: 1fr;
-  }
-  .footer-cta-banner {
-    padding: 1.5rem;
-    text-align: center;
-  }
-  .footer-cta-actions {
-    width: 100%;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
   }
-  .carousel-slide-viewport {
-    height: 23.75rem;
+
+  .hero-badges-wrapper {
+    gap: 0.375rem;
+    margin-bottom: 1.25rem;
   }
-  .carousel-slide-title {
-    font-size: 1.8rem;
+
+  .hero-top-badge {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    color: #CBD5E1;
+    background: rgba(229, 9, 20, 0.08);
+    border-color: rgba(229, 9, 20, 0.22);
   }
-  .phone-device-frame {
-    width: 19.375rem;
-    height: 36.25rem;
+
+  .hero-status-badge {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.5rem;
+    color: #94A3B8;
+  }
+
+  /* TITLE — PROMINENT, HIGH CONTRAST & PUNCHY */
+  .hero-headline {
+    font-size: clamp(2.45rem, 9.6vw, 3.1rem);
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+    text-shadow: 0 0.125rem 1.25rem rgba(0, 0, 0, 0.95);
+  }
+
+  .hero-headline .text-accent-red {
+    color: #FF1F2D;
+    text-shadow: 0 0 1.5rem rgba(229, 9, 20, 0.9), 0 0 3rem rgba(229, 9, 20, 0.5);
+  }
+
+  /* SUPPORTING LEAD TEXT — SUBDUED, LIGHT WEIGHT & SECONDARY */
+  .hero-lead-text {
+    font-size: 0.84rem;
+    font-weight: 400;
+    color: #94A3B8;
+    line-height: 1.5;
+    margin: 0 auto 1.6rem;
+    max-width: 21.5rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+    opacity: 0.9;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.625rem;
+    margin-bottom: 1.125rem;
+  }
+
+  .hero-btn-cta {
+    width: 100%;
+    height: 3.125rem;
+    font-size: 1.15rem;
+    padding: 0 1.25rem;
+  }
+
+  .hero-btn-plans {
+    width: 100%;
+    height: 2.625rem;
+    font-size: 1.02rem;
+    padding: 0 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #94A3B8;
+  }
+
+  .hero-btn-plans:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .hero-proofs-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 0.85rem;
+    font-size: 0.72rem;
+    color: #94A3B8;
+    margin-bottom: 0.25rem;
+  }
+
+  .proof-item {
+    gap: 0.25rem;
+  }
+
+  /* GLOBAL SECTION HEADERS HIERARCHY ON MOBILE */
+  .section-header-center {
+    margin: 0 auto 2rem;
+    padding: 0 0.5rem;
+  }
+
+  .section-badge {
+    font-size: 0.65rem;
+    padding: 0.1875rem 0.55rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    margin-bottom: 0.45rem;
+  }
+
+  .section-badge svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .section-title {
+    font-size: clamp(2.35rem, 8.8vw, 2.9rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.88rem;
+    color: #94A3B8;
+    line-height: 1.45;
+    max-width: 22.5rem;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+
+  /* STATS BAND ON MOBILE - 2X2 COMPACT BENTO GRID */
+  .hero-stats-band-section {
+    padding: 2.5rem 0;
+  }
+
+  .hero-editorial-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
+    margin-top: 0;
+    transform: none;
+  }
+
+  .hero-editorial-stats-grid .stat-card {
+    padding: 1rem 0.875rem;
+    min-height: auto;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-editorial-stats-grid .stat-card-red-bar {
+    width: 1.5rem;
+    height: 0.1875rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .hero-editorial-stats-grid .stat-card-num-val {
+    font-size: 1.85rem;
+  }
+
+  .hero-editorial-stats-grid .stat-card-star-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .hero-editorial-stats-grid .stat-card-label {
+    font-size: 0.78rem;
+    margin-top: 0.125rem;
+  }
+
+  .hero-editorial-stats-grid .stat-card-desc {
+    font-size: 0.68rem;
+    line-height: 1.35;
+    margin-top: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .hero-editorial-stats-grid .stat-card-outline-num {
+    font-size: 2.5rem;
+    right: 0.25rem;
+    bottom: -0.25rem;
+    opacity: 0.08;
+  }
+
+  /* ESTRUTURA CAROUSEL ON MOBILE */
+  .structure-lateral-carousel-wrapper {
+    padding: 0;
+  }
+  .structure-carousel-stage {
+    padding: 0.5rem 0 1rem;
+  }
+  .structure-bento-card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .structure-card-img-wrap {
+    border-radius: inherit;
+  }
+  .structure-bento-card.card-out-of-focus {
+    opacity: 0.4;
+    filter: blur(1.5px);
+    transform: scale(0.9);
+  }
+  .structure-bento-card.card-in-focus {
+    opacity: 1;
+    filter: none;
+    transform: scale(1);
+  }
+  .structure-caption-title {
+    font-size: 1.15rem;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+  }
+  .structure-caption-sub {
+    font-size: 0.72rem;
+    line-height: 1.3;
+    color: #94A3B8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* MODALIDADES ON MOBILE — STREAMLINED COMPACT CARDS */
+  .modalities-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+  }
+  .modality-stitch-card {
+    min-height: auto;
+    padding: 1.125rem 1rem;
+    border-radius: var(--radius-md);
+  }
+  .modality-card-content-box {
+    height: auto;
+  }
+  .modality-tag-pill {
+    font-size: 0.7rem;
+    margin-bottom: 0.2rem;
+  }
+  .modality-stitch-title {
+    font-size: 1.35rem;
+    line-height: 1.05;
+    margin-bottom: 0.35rem;
+  }
+  .modality-desc-text {
+    font-size: 0.76rem;
+    color: #94A3B8;
+    line-height: 1.35;
+    min-height: auto;
+    margin-bottom: 0.625rem;
+  }
+  .modality-benefits-checklist {
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+    padding-top: 0.5rem;
+  }
+  .modality-benefit-item {
+    font-size: 0.74rem;
+    gap: 0.35rem;
+    line-height: 1.3;
+  }
+  .modality-btn-wrap .btn-primary {
+    height: 2.625rem;
+    font-size: 1.02rem;
+    width: 100%;
+  }
+
+  /* CONVENIOS ON MOBILE — BRAND TAB SWITCHER & 2X2 PILLARS */
+  .convenios-mobile-tab-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto 1.25rem;
+    background: rgba(18, 20, 28, 0.8);
+    padding: 0.25rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 20rem;
+  }
+  .convenio-tab-btn {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-support);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    border: none;
+    background: transparent;
+    color: #94A3B8;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .convenio-tab-btn.active-wellhub {
+    background: #E50914;
+    color: #ffffff;
+    box-shadow: 0 0 1rem rgba(229, 9, 20, 0.4);
+  }
+  .convenio-tab-btn.active-totalpass {
+    background: #00E676;
+    color: #040507;
+    box-shadow: 0 0 1rem rgba(0, 230, 118, 0.4);
+  }
+  .mobile-tab-hidden {
+    display: none !important;
+  }
+  .mobile-tab-active {
+    display: flex !important;
+  }
+
+  .convenios-two-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: 1rem;
+  }
+  .convenio-brand-card {
+    padding: 1.25rem 1.125rem;
+    border-radius: var(--radius-md);
+  }
+  .convenio-logo-stage {
+    height: 3.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .convenio-floating-logo {
+    max-height: 2rem;
+  }
+  .convenio-rich-features {
+    gap: 0.375rem;
+    margin-bottom: 0.875rem;
+  }
+  .convenio-rich-features li {
+    font-size: 0.76rem;
+    gap: 0.35rem;
+  }
+  .convenios-four-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .convenio-pillar-card {
+    padding: 0.875rem 0.75rem;
+    border-radius: var(--radius-md);
+  }
+  .pillar-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.15rem;
+  }
+  .pillar-desc {
+    font-size: 0.68rem;
+    line-height: 1.3;
+    color: #94A3B8;
+  }
+
+  /* INSTAGRAM REELS SHOWCASE ON MOBILE */
+  .insta-showcase-section {
+    padding: 2.75rem 0;
+  }
+  .insta-main-grid-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .insta-hero-content-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .insta-hero-content-col .section-badge {
+    margin: 0 auto 0.5rem;
+  }
+  .insta-hero-content-col .section-title {
+    text-align: center !important;
+  }
+  .insta-hero-content-col .section-subtitle {
+    text-align: center !important;
+    margin: 0 auto 1.25rem;
+    max-width: 22rem;
+  }
+  .insta-stats-glass-card {
+    padding: 0.625rem 0.875rem;
+    margin: 0 auto 1.25rem;
+    width: 100%;
+    max-width: 22rem;
+  }
+  .insta-stat-meta .stat-value {
+    font-size: 1.15rem;
+  }
+  .insta-stat-meta .stat-label {
+    font-size: 0.6rem;
+  }
+  .insta-follow-cta-btn {
+    width: 100%;
+    height: 2.75rem;
+    font-size: 1.05rem;
+    justify-content: center;
+  }
+
+  .insta-mobile-carousel-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    width: calc(100% + 2rem);
+    overflow: visible;
+    padding: 0.5rem 0 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .insta-mobile-carousel-wrapper .structure-carousel-stage {
+    overflow: visible !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    padding: 1.25rem 0 1.25rem;
+  }
+
+  /* 3D ANIMATED DEPTH ICONS ANCHORED INSIDE STAGE */
+  .insta-mobile-3d-card-corner {
+    position: absolute;
+    pointer-events: none;
+  }
+  .insta-mobile-3d-card-corner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* 1. Canto Superior Esquerdo: ATRÁS do card (z-index 2 contra z-index 10 do card) */
+  .insta-mobile-3d-card-corner.top-left-behind {
+    top: 0.15rem;
+    left: 15%;
+    width: 3.35rem;
+    height: 3.35rem;
+    z-index: 2; /* Estritamente ATRÁS da track e do card que possuem z-index 10 */
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(229, 9, 20, 0.6));
+    animation: float-3d-behind 3.8s ease-in-out infinite;
+  }
+
+  /* 2. Canto Superior Direito: NA FRENTE, 100% NÍTIDO e com GLOW */
+  .insta-mobile-3d-card-corner.top-right-front {
+    top: 0.15rem;
+    right: 15%;
+    width: 3.35rem;
+    height: 3.35rem;
+    z-index: 40; /* Na frente do card */
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(229, 9, 20, 0.75));
+    animation: float-3d-front-tr 3.5s ease-in-out infinite 0.3s;
+  }
+
+  /* 3. Canto Inferior Esquerdo: NA FRENTE, MAIOR, COM BLUR & GLOW DE PRIMEIRO PLANO */
+  .insta-mobile-3d-card-corner.bottom-left-front {
+    bottom: 1.25rem;
+    left: 12%;
+    width: 4.5rem;
+    height: 4.5rem;
+    z-index: 40; /* Na frente do card e totalmente acima do passador */
+    opacity: 1;
+    filter: blur(1.2px) drop-shadow(0 0 20px rgba(229, 9, 20, 0.95)) drop-shadow(0 0 35px rgba(229, 9, 20, 0.65));
+    animation: float-3d-front-bl 3.4s ease-in-out infinite 0.7s;
+  }
+
+  .insta-mobile-cta-wrap {
+    margin-top: 1.5rem !important;
+    padding: 0 1rem;
+    width: 100%;
+  }
+
+  @keyframes float-3d-behind {
+    0%, 100% {
+      transform: translateY(0) rotate(-6deg) scale(0.95);
+    }
+    50% {
+      transform: translateY(-7px) rotate(1deg) scale(1);
+    }
+  }
+
+  @keyframes float-3d-front-tr {
+    0%, 100% {
+      transform: translateY(0) rotate(6deg) scale(1);
+    }
+    50% {
+      transform: translateY(-8px) rotate(-3deg) scale(1.06);
+    }
+  }
+
+  @keyframes float-3d-front-bl {
+    0%, 100% {
+      transform: translateY(0) rotate(-5deg) scale(1);
+    }
+    50% {
+      transform: translateY(-9px) rotate(3deg) scale(1.08);
+    }
+  }
+
+  .insta-mobile-card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 14.5rem;
+    text-decoration: none;
+  }
+  .insta-mobile-card .insta-card-img-wrap {
+    border-radius: inherit;
+    height: 10rem;
+  }
+  .insta-mobile-card.card-out-of-focus {
+    opacity: 0.4;
+    filter: blur(1.5px);
+    transform: scale(0.9);
+  }
+  .insta-mobile-card.card-in-focus {
+    opacity: 1;
+    filter: none;
+    border: 0.0938rem solid var(--accent-red);
+    box-shadow: 0 0 1.75rem rgba(229, 9, 20, 0.4);
+    transform: scale(1);
+  }
+
+  .insta-bottom-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .insta-bento-stitch-card {
+    padding: 0.875rem 0.75rem;
+    border-radius: var(--radius-md);
+  }
+  .insta-bento-stitch-title {
+    font-size: 0.95rem;
+  }
+  .insta-bento-desc-text {
+    font-size: 0.68rem;
+    line-height: 1.3;
+    color: #94A3B8;
+  }
+
+  /* PLANS & PRICING ON MOBILE */
+  .stitch-pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .stitch-price-card {
+    padding: 1.25rem 1.125rem;
+    border-radius: var(--radius-md);
+  }
+  .stitch-plan-title {
+    font-size: 1.4rem;
+  }
+  .stitch-plan-subtitle {
+    font-size: 0.74rem;
+    color: #94A3B8;
+  }
+  .stitch-price-val {
+    font-size: 2.25rem;
+  }
+  .stitch-features-list {
+    gap: 0.375rem;
+    margin: 0.875rem 0 1rem;
+  }
+  .stitch-features-list li {
+    font-size: 0.76rem;
+    gap: 0.35rem;
+  }
+  .stitch-plan-cta-btn {
+    height: 2.75rem;
+    font-size: 1.05rem;
+  }
+
+  /* REVIEWS ON MOBILE */
+  .reviews-split-layout {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .reviews-info-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .reviews-aligned-title {
+    text-align: center;
+    margin: 0.25rem auto 0.75rem;
+  }
+  .reviews-rating-hero-strip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem 1rem;
+    gap: 0.875rem;
+    margin: 0 auto 0.875rem;
+    align-self: center;
+    width: auto;
+    max-width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .rating-huge-number {
+    font-size: 2.35rem;
+    line-height: 1;
+  }
+  .rating-stars-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.2rem;
+  }
+  .rating-excellence-tag {
+    font-size: 0.72rem;
+    color: #94A3B8;
+  }
+  .stars-cluster {
+    display: flex;
+    gap: 0.2rem;
+  }
+  .reviews-short-summary {
+    font-size: 0.82rem;
+    color: #94A3B8;
+    margin: 0 auto 0.875rem;
+    max-width: 22rem;
+    text-align: center;
+    line-height: 1.45;
+  }
+  .reviews-mobile-cta-wrap {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .reviews-view-all-btn {
+    width: 100%;
+    height: 2.625rem;
+    font-size: 0.95rem;
+    justify-content: center;
+  }
+  .review-bento-card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    min-height: 15rem;
+    padding: 1.125rem 1rem;
+  }
+  .review-bento-card.card-out-of-focus {
+    opacity: 0.4;
+    filter: blur(1.5px);
+    transform: scale(0.9);
+  }
+  .review-bento-card.card-in-focus {
+    opacity: 1;
+    filter: none;
+    border: 0.0938rem solid var(--accent-red);
+    box-shadow: 0 0 1.75rem rgba(229, 9, 20, 0.4);
+    transform: scale(1);
+  }
+  .review-card-text {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: #CBD5E1;
+  }
+  .review-user-name {
+    font-size: 0.9rem;
+  }
+  .review-user-time {
+    font-size: 0.68rem;
+  }
+
+  /* LOCATION & SCHEDULE ON MOBILE */
+  .location-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  .location-stitch-card {
+    padding: 1.125rem 1rem;
+    border-radius: var(--radius-md);
+  }
+  .schedule-row {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .compact-map-wrap {
+    height: 9.5rem;
+    border-radius: var(--radius-md);
+  }
+
+  /* FOOTER ON MOBILE — CLEAN 2-COLUMNS */
+  .footer-section {
+    padding: 3.25rem 0 1.75rem;
+  }
+  .footer-main-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .footer-brand-col {
+    grid-column: 1 / -1;
+  }
+  .footer-col-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.625rem;
+  }
+  .footer-nav-list {
+    gap: 0.35rem;
+  }
+  .footer-nav-link {
+    font-size: 0.78rem;
   }
 }
 

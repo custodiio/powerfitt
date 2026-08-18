@@ -3,7 +3,7 @@ import { HelpCircle, ChevronDown, MessageSquare, ArrowRight, Sparkles } from "lu
 import { openWhatsApp } from "../utils/whatsapp";
 
 export default function Faq() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     {

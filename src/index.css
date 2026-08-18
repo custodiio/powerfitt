@@ -42,10 +42,33 @@
   
   --shadow-card: 0 0.625rem 1.875rem -0.625rem rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 1.5625rem rgba(229, 9, 20, 0.35);
+
+  --structure-card-width: 25.625rem;
+  --structure-card-gap: 1.25rem;
+  --review-card-width: 16.5rem;
+  --review-card-gap: 1rem;
+}
+
+@media (max-width: 48rem) {
+  :root {
+    --structure-card-width: 15rem;
+    --structure-card-gap: 0.75rem;
+    --review-card-width: 14rem;
+    --review-card-gap: 0.625rem;
+  }
+}
+
+@media (max-width: 23.5rem) {
+  :root {
+    --structure-card-width: 13.5rem;
+    --structure-card-gap: 0.625rem;
+    --review-card-width: 12.5rem;
+    --review-card-gap: 0.5rem;
+  }
 }
 
 /* RESET & BASE */
-*, *::before, *::after {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -56,6 +79,18 @@ html {
   color-scheme: dark;
   scroll-padding-top: 5rem;
   font-size: 16px;
+}
+
+@media (max-width: 48rem) {
+  html {
+    font-size: 14.5px;
+  }
+}
+
+@media (max-width: 23.5rem) {
+  html {
+    font-size: 13.5px;
+  }
 }
 
 /* Custom ultra-smooth scroll for modern browsers */
@@ -178,7 +213,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
   .section-padding {
-    padding: 3.75rem 0;
+    padding: 2.625rem 0;
     scroll-margin-top: 4.5rem;
   }
   .container {

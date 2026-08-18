@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
   Building2, 
   CheckCircle2, 
@@ -13,7 +13,31 @@ import {
 } from "lucide-react";
 import { openWhatsApp } from "../utils/whatsapp";
 
-export default function ConveniosSection() {
+export default function ConveniosSection({ onOpenTrialModal }) {
+  const [activeTab, setActiveTab] = useState("wellhub");
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 40;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    if (distance > minSwipeDistance) {
+      setActiveTab("totalpass");
+    } else if (distance < -minSwipeDistance) {
+      setActiveTab("wellhub");
+    }
+  };
+
   const pillars = [
     {
       num: "01",
@@ -48,21 +72,41 @@ export default function ConveniosSection() {
         <div className="section-header-center">
           <div className="section-badge red-badge">
             <Building2 size={16} />
-            <span>CONVÊNIOS & BENEFÍCIOS CORPORATIVOS</span>
+            <span>CONVÊNIOS & BENEFÍCIOS</span>
           </div>
           <h2 className="section-title">
-            ACEITAMOS DOIS GRANDES PLANOS <br />
-            <span className="text-accent-red">PARA VOCÊ TREINAR SEM LIMITES!</span>
+            TREINE COM SEU <span className="text-accent-red">CONVÊNIO</span>
           </h2>
           <p className="section-subtitle">
-            Se você possui benefício corporativo pela sua empresa, você treina com acesso total na PowerFitt.
+            Acesso total e sem burocracia para alunos Wellhub (Gympass) e TotalPass na PowerFitt.
           </p>
         </div>
 
+        {/* MOBILE BRAND TOGGLE SWITCH (MOBILE ONLY) */}
+        <div className="convenios-mobile-tab-nav mobile-only">
+          <button 
+            className={`convenio-tab-btn ${activeTab === "wellhub" ? "active-wellhub" : ""}`}
+            onClick={() => setActiveTab("wellhub")}
+          >
+            <span>WELLHUB (GYMPASS)</span>
+          </button>
+          <button 
+            className={`convenio-tab-btn ${activeTab === "totalpass" ? "active-totalpass" : ""}`}
+            onClick={() => setActiveTab("totalpass")}
+          >
+            <span>TOTALPASS</span>
+          </button>
+        </div>
+
         {/* 2 MAIN CORPORATE BENEFIT CARDS WITH FLOATING LOGOS & GLOW */}
-        <div className="convenios-two-cards-grid">
+        <div 
+          className="convenios-two-cards-grid"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
           {/* WELLHUB & GYMPASS CARD */}
-          <div className="convenio-brand-card wellhub-card glass-panel glow-red group">
+          <div className={`convenio-brand-card wellhub-card glass-panel glow-red group ${activeTab === "wellhub" ? "mobile-tab-active" : "mobile-tab-hidden"}`}>
             {/* RADIAL GLOW HOVER */}
             <div className="convenio-accent-gradient wellhub-gradient"></div>
 
@@ -119,7 +163,7 @@ export default function ConveniosSection() {
           </div>
 
           {/* TOTALPASS CARD */}
-          <div className="convenio-brand-card totalpass-card glass-panel glow-green group">
+          <div className={`convenio-brand-card totalpass-card glass-panel glow-green group ${activeTab === "totalpass" ? "mobile-tab-active" : "mobile-tab-hidden"}`}>
             {/* RADIAL GLOW HOVER */}
             <div className="convenio-accent-gradient totalpass-gradient"></div>
 
