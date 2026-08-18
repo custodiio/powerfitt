@@ -1,5 +1,5 @@
 import React from "react";
-import { Dumbbell, Activity, Music, Users, Check, ArrowRight, Sparkles } from "lucide-react";
+import { Dumbbell, Activity, Music, CheckCircle2, ArrowRight, Sparkles } from "lucide-react";
 import { openWhatsApp } from "../utils/whatsapp";
 
 export default function Modalities({ onOpenTrialModal }) {
@@ -7,8 +7,8 @@ export default function Modalities({ onOpenTrialModal }) {
     {
       num: "01",
       icon: Dumbbell,
-      title: "Musculação & Hipertrofia",
       tag: "Força & Estética",
+      title: "Musculação & Hipertrofia",
       desc: "Equipamentos biomecânicos modernos e ampla sala de pesos livres (halteres de 1kg a 50kg) para ganho de massa muscular com máxima segurança.",
       features: [
         "Aparelhos articulados e convergentes",
@@ -20,8 +20,8 @@ export default function Modalities({ onOpenTrialModal }) {
     {
       num: "02",
       icon: Activity,
-      title: "Treinamento Híbrido & Funcional",
       tag: "Alta Queima Calórica",
+      title: "Treinamento Híbrido & Funcional",
       desc: "Combinação dinâmica entre força e cardio com cordas navais, kettlebells e esteiras para acelerar o metabolismo e queimar gordura.",
       features: [
         "Aulas dinâmicas e sem rotina monótona",
@@ -33,8 +33,8 @@ export default function Modalities({ onOpenTrialModal }) {
     {
       num: "03",
       icon: Music,
-      title: "Aulas de Dança & Ritmos",
       tag: "Movimento & Energia",
+      title: "Aulas de Dança & Ritmos",
       desc: "Aulas coletivas contagiantes para quem quer perder peso se divertindo ao som das músicas mais animadas.",
       features: [
         "Ambiente descontraído e integrador",
@@ -42,25 +42,17 @@ export default function Modalities({ onOpenTrialModal }) {
         "Melhora da coordenação e ritmo"
       ],
       whatsappMsg: "Olá! Gostaria de saber os horários das Aulas de Dança na PowerFitt."
-    },
-    {
-      num: "04",
-      icon: Users,
-      title: "Acompanhamento de Instrutores",
-      tag: "Orientação Completa",
-      desc: "Professores presentes no salão em tempo integral para tirar dúvidas, ajustar cargas e garantir a execução perfeita dos seus exercícios.",
-      features: [
-        "Professores credenciados no salão",
-        "Correção de postura e prevenção de lesões",
-        "Suporte diário para tirar dúvidas de treino"
-      ],
-      whatsappMsg: "Olá! Gostaria de saber como funciona o acompanhamento dos instrutores na PowerFitt."
     }
   ];
 
   return (
-    <section id="modalidades" className="section-padding modalities-redesigned-section">
-      <div className="container">
+    <section id="modalidades" className="section-padding modalities-redesigned-section relative">
+      {/* ATMOSPHERIC BACKGROUND AMBIENT GLOW */}
+      <div className="modalities-ambient-glow-layer pointer-events-none">
+        <div className="modalities-ambient-glow-center"></div>
+      </div>
+
+      <div className="container relative z-10">
         {/* SECTION HEADER */}
         <div className="section-header-center">
           <div className="section-badge red-badge">
@@ -75,47 +67,61 @@ export default function Modalities({ onOpenTrialModal }) {
           </p>
         </div>
 
-        {/* 4 EDITORIAL MODALITY CARDS */}
+        {/* 3 STITCH BENTO MODALITY CARDS */}
         <div className="modalities-cards-grid">
           {modalities.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.num} className="modality-card-item glass-card">
-                <div className="modality-card-topbar">
-                  <span className="modality-num-tag">{item.num}</span>
-                  <div className="modality-icon-ring">
-                    <Icon size={22} className="text-accent-red" />
-                  </div>
-                </div>
+              <div key={item.num} className="stat-card modality-stitch-card">
+                {/* RADIAL PULSE HOVER LAYER */}
+                <div className="bg-pulse"></div>
 
-                <div className="modality-tag-pill">{item.tag}</div>
-                <h3 className="modality-card-title">{item.title}</h3>
-                <p className="modality-card-desc">{item.desc}</p>
+                {/* GIANT BACKGROUND WATERMARK OUTLINE NUMBER */}
+                <div className="stat-card-outline-num">{item.num}</div>
 
-                <div className="modality-features-checklist">
-                  {item.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="modality-feat-line">
-                      <Check size={15} className="text-accent-red flex-shrink-0" />
-                      <span>{feat}</span>
+                <div className="stat-card-content modality-card-content-box">
+                  {/* TOP HEADER ROW WITH ACCENT BAR & GLOWING ICON */}
+                  <div className="pillar-header-row">
+                    <div className="stat-card-red-bar"></div>
+                    <div className="pillar-icon-glow-wrap">
+                      <Icon size={20} className="text-accent-red" />
                     </div>
-                  ))}
-                </div>
+                  </div>
 
-                <div className="modality-card-actions">
-                  <button 
-                    className="btn-secondary w-full btn-modality-cta"
-                    onClick={() => openWhatsApp(item.whatsappMsg)}
-                  >
-                    <span>Quero Treinar Nesta Modalidade</span>
-                    <ArrowRight size={16} />
-                  </button>
+                  {/* TAG BADGE */}
+                  <span className="modality-tag-pill">{item.tag}</span>
+
+                  {/* TITLE & DESCRIPTION */}
+                  <h3 className="modality-stitch-title">{item.title}</h3>
+                  <p className="stat-card-desc modality-desc-text">{item.desc}</p>
+
+                  {/* BENEFITS CHECKLIST */}
+                  <ul className="modality-benefits-checklist">
+                    {item.features.map((feat, fIdx) => (
+                      <li key={fIdx} className="modality-benefit-item">
+                        <CheckCircle2 size={18} className="text-accent-red flex-shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA BUTTON */}
+                  <div className="modality-btn-wrap">
+                    <button 
+                      className="w-full plan-whatsapp-cta-btn btn-secondary-outline btn-modality-stitch-cta"
+                      onClick={() => openWhatsApp(item.whatsappMsg)}
+                    >
+                      <span>Quero Treinar Nesta Modalidade</span>
+                      <ArrowRight size={17} className="btn-arrow-icon" />
+                    </button>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* BOTTOM CTA CALLOUT */}
+        {/* BOTTOM CTA CALLOUT BANNER */}
         <div className="modalities-cta-banner glass-card neon-border-glow">
           <div className="banner-text">
             <h4>Ainda não sabe qual modalidade escolher?</h4>
