@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { X, Sparkles, CheckCircle2, ArrowRight, ChevronDown } from "lucide-react";
 import confetti from "canvas-confetti";
 import { openWhatsApp } from "../utils/whatsapp";
+import { trackConversion } from "../utils/analytics";
 
 export default function TrialModal({ isOpen, onClose }) {
   const [name, setName] = useState("");
@@ -17,6 +18,13 @@ export default function TrialModal({ isOpen, onClose }) {
     if (!name || !phone) return;
 
     setSubmitted(true);
+
+    // Track conversion event for Meta Pixel, GA4 and GTM
+    trackConversion("Lead", {
+      method: "trial_modal",
+      goal,
+      time_preference: timePreference
+    });
 
     // Launch celebratory confetti
     confetti({
@@ -87,6 +95,7 @@ export default function TrialModal({ isOpen, onClose }) {
                   type="text"
                   placeholder="Ex: Alessandro Silva"
                   required
+                  maxLength={60}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="form-input"
@@ -99,6 +108,7 @@ export default function TrialModal({ isOpen, onClose }) {
                   type="tel"
                   placeholder="Ex: (64) 99999-9999"
                   required
+                  maxLength={20}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   className="form-input"

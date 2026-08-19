@@ -1,9 +1,11 @@
 import React from "react";
 import { MessageCircle } from "lucide-react";
 import { openWhatsApp } from "../utils/whatsapp";
+import { trackConversion } from "../utils/analytics";
 
 export default function FloatingWhatsApp() {
   const handleClick = () => {
+    trackConversion("Contact", { method: "floating_whatsapp" });
     openWhatsApp("Olá! Gostaria de informações sobre os treinos e planos da PowerFitt Academia.");
   };
 

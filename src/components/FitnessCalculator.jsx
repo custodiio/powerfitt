@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Calculator, Flame, Activity, Sparkles, ArrowRight, CheckCircle2, RotateCcw } from "lucide-react";
 import confetti from "canvas-confetti";
 import { openWhatsApp } from "../utils/whatsapp";
+import { trackConversion } from "../utils/analytics";
 
 export default function FitnessCalculator() {
   const [gender, setGender] = useState("male");
@@ -83,6 +84,14 @@ export default function FitnessCalculator() {
       goalTitle
     });
 
+    // Track fitness diagnosis event
+    trackConversion("Custom_CalculateFitness", {
+      bmi: bmi.toFixed(1),
+      status: bmiStatus,
+      tdee,
+      goal
+    });
+
     // Launch celebratory confetti
     confetti({
       particleCount: 50,
@@ -93,6 +102,13 @@ export default function FitnessCalculator() {
 
   const handleSendToWhatsApp = () => {
     if (!result) return;
+
+    // Track lead event for Meta Pixel, GA4 and GTM
+    trackConversion("Lead", {
+      method: "fitness_calculator_whatsapp",
+      goal: result.goalTitle
+    });
+
     const msg = `Olá, equipe da PowerFitt! Fiz o cálculo fitness no site:\n\n` +
       `📊 *Meu IMC:* ${result.bmi} (${result.bmiStatus})\n` +
       `🔥 *Gasto Calórico Estimado:* ${result.tdee} kcal/dia\n` +
